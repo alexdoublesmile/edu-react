@@ -1,16 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 
-const counter = 0;
-const formatCounter = () => counter === 0 ? "empty" : counter;
-const getBadgeColorClass = counter => counter === 0 ? "bg-warning" : "bg-primary";
+const Counter = () => {
+    const [count, setCount] = useState(0);
 
-const badgeClasses = `badge ${getBadgeColorClass(counter)} m-2`;
-const buttonClasses = "btn btn-sm bg-primary m-2";
+    const formatCount = () => count === 0 ? "empty" : count;
+    const getBadgeColorClass = () => count === 0 ? "bg-warning" : "bg-primary";
 
-const Counter = () => 
-    <>
-        <span className={badgeClasses}>{formatCounter()}</span>
-        <button className={buttonClasses}>+</button>
-    </>;
+    const badgeClasses = `badge ${getBadgeColorClass()} m-2`;
+    const buttonClasses = "btn btn-sm bg-primary m-2";
+    
+    const handleIncrement = () => setCount(prevState => ++prevState);
+    const handleDecrement = () => setCount(prevState => --prevState);
+    
+    return (
+        <>
+            <span className={badgeClasses}>{formatCount()}</span>
+            <button className={buttonClasses} onClick={handleIncrement}>+</button>
+            <button className={buttonClasses} onClick={handleDecrement}>-</button>
+        </>
+    );  
+};
 
 export default Counter;
