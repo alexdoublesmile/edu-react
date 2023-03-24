@@ -29,7 +29,7 @@ const Users = () => {
                 <td>{renderQualities(user.qualities)}</td>
                 <td>{user.profession.name}</td>
                 <td>{user.completedMeetings}</td>
-                <td>{user.rate}</td>
+                <td>{user.rate} / 5</td>
                 <td>
                     <button className={getDeleteButtonClasses()}>
                         delete
