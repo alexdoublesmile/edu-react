@@ -14,6 +14,7 @@ const Counter = (props) => {
     
     return (
         <div>
+            <span>{props.name}</span>
             <span className={badgeClasses}>{formatCount()}</span>
             <button className={buttonClasses} onClick={handleIncrement}>+</button>
             <button className={buttonClasses} onClick={handleDecrement}>-</button>
