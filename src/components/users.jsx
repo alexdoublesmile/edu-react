@@ -8,13 +8,15 @@ const Users = () => {
     const getQualityClasses = color => `badge bg-${color} btn-sm m-2`;
     const getDeleteButtonClasses = () => "btn btn-danger";
 
-    const renderHeaderText = () => <p className="btn btn-primary btn-lg">{getUsersNumberText()} are waiting for you</p>;
+    const handleDeleteUser = id => setUsers(prevState => prevState.filter(user => user._id !== id));
+
+    const renderHeaderText = () => <p className="btn btn-primary btn-lg">{getUsersNumberText()} waiting for you!</p>;
     
     const getUsersNumberText = () => {
         if (users.length > 0) {
-            return `${users.length} people`
+            return users.length > 1 ? `${users.length} persons are` : "1 person is"
         } else {
-            return "Nobody";
+            return "Nobody is";
         }
     };
 
@@ -31,7 +33,10 @@ const Users = () => {
                 <td>{user.completedMeetings}</td>
                 <td>{user.rate} / 5</td>
                 <td>
-                    <button className={getDeleteButtonClasses()}>
+                    <button 
+                        className={getDeleteButtonClasses()}
+                        onClick={() => handleDeleteUser(user._id)}
+                    >
                         delete
                     </button>
                 </td>
