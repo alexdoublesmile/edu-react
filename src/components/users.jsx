@@ -5,7 +5,7 @@ const Users = () => {
     const [users, setUsers] = useState(api.users.fetchAll());
     
     const getTableClasses = () => "table table-striped table-hover";
-    const getQualityClasses = color => `btn btn-${color} btn-sm m-1`;
+    const getQualityClasses = color => `badge bg-${color} btn-sm m-1`;
     const getDeleteButtonClasses = () => "btn btn-danger";
 
     const renderHeaderText = () => <p>{getUsersNumberText()} are waiting for you</p>;
