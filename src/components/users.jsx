@@ -14,10 +14,10 @@ const Users = () => {
     const renderUser = user => {
         return (
             <tr>
-                <th scope="row">{user._id}</th>
+                {/* <th scope="row">{user._id}</th> */}
                 <td>{user.name}</td>
-                <td>{user.profession.name}</td>
                 <td>{renderQualities(user.qualities)}</td>
+                <td>{user.profession.name}</td>
                 <td>{user.completedMeetings}</td>
                 <td>{user.rate}</td>
             </tr>
@@ -39,12 +39,12 @@ const Users = () => {
         <table className={getTableClasses()}>
             <thead>
                 <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Profession</th>
-                    <th scope="col">Qualities</th>
-                    <th scope="col">Meetings</th>
-                    <th scope="col">Rate</th>
+                    <th scope="col">Имя</th>
+                    <th scope="col">Качества</th>
+                    <th scope="col">Профессия</th>
+                    <th scope="col">Кол-во встреч</th>
+                    <th scope="col">Оценка</th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
