@@ -13,11 +13,11 @@ const Counter = () => {
     const handleDecrement = () => setCount(prevState => --prevState);
     
     return (
-        <>
+        <div>
             <span className={badgeClasses}>{formatCount()}</span>
             <button className={buttonClasses} onClick={handleIncrement}>+</button>
             <button className={buttonClasses} onClick={handleDecrement}>-</button>
-        </>
+        </div>
     );
 };
 
