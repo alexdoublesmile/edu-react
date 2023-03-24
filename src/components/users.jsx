@@ -8,9 +8,19 @@ const Users = () => {
     const getQualityClasses = color => `btn btn-${color} btn-sm m-1`;
     const getDeleteButtonClasses = () => "btn btn-danger";
 
+    const renderHeaderText = () => <p>{getUsersNumberText()} are waiting for you</p>;
+    
+    const getUsersNumberText = () => {
+        if (users.length > 0) {
+            return `${users.length} people`
+        } else {
+            return "Nobody";
+        }
+    };
+
     const renderUsers = () => {
         return users.map(user => renderUser(user));
-    }    
+    };   
 
     const renderUser = user => {
         return (
@@ -27,7 +37,7 @@ const Users = () => {
                 </td>
             </tr>
         );
-    }
+    };
 
     const renderQualities = qualities => {
         return qualities.map(quality => 
@@ -37,25 +47,28 @@ const Users = () => {
                 {quality.name}
             </span>
         );
-    }
+    };
 
 
     return (
-        <table className={getTableClasses()}>
-            <thead>
-                <tr>
-                    <th scope="col">Имя</th>
-                    <th scope="col">Качества</th>
-                    <th scope="col">Профессия</th>
-                    <th scope="col">Кол-во встреч</th>
-                    <th scope="col">Оценка</th>
-                    <th scope="col"></th>
-                </tr>
-            </thead>
-            <tbody>
-                {renderUsers()}
-            </tbody>
-        </table>
+        <>
+            <p>{renderHeaderText()}</p>
+            <table className={getTableClasses()}>
+                <thead>
+                    <tr>
+                        <th scope="col">Имя</th>
+                        <th scope="col">Качества</th>
+                        <th scope="col">Профессия</th>
+                        <th scope="col">Кол-во встреч</th>
+                        <th scope="col">Оценка</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {renderUsers()}
+                </tbody>
+            </table>
+        </>
     );
 }
 
