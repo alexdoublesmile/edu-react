@@ -1,8 +1,7 @@
 import React from "react";
 
-import Counter from "./components/counter";
-import Users from "./components/users";
+import CounterList from "./components/counterList";
 
-const App = () => <Counter />;
+const App = () => <CounterList />;
 
 export default App;
