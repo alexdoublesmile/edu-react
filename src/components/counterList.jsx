@@ -9,15 +9,15 @@ const counterList = [
         value: 0
     },
     {
-        id: 0, 
+        id: 1, 
         value: 0
     },
     {
-        id: 0, 
+        id: 2, 
         value: 0
     },
     {
-        id: 0, 
+        id: 3, 
         value: 0
     }
 ]
@@ -26,7 +26,7 @@ const renderCounterList = () => counterList.map(counter => renderCounter(counter
 
 const renderCounter = counter => {
     return (
-        <Counter />
+        <Counter key={counter.id} value={counter.value} />
     );
 };
 

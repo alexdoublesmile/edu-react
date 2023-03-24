@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
-const Counter = () => {
-    const [count, setCount] = useState(0);
+const Counter = (props) => {
+    const [count, setCount] = useState(props.value);
 
     const formatCount = () => count === 0 ? "empty" : count;
     const getBadgeColorClass = () => count === 0 ? "bg-warning" : "bg-primary";
