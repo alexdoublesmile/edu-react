@@ -20,6 +20,7 @@ const Users = () => {
                 <td>{user.profession.name}</td>
                 <td>{user.completedMeetings}</td>
                 <td>{user.rate}</td>
+                <td><button className="bg-danger">delete</button></td>
             </tr>
         );
     }
