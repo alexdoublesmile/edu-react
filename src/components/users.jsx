@@ -3,7 +3,6 @@ import api from "../api/index";
 
 const Users = () => {
     const [users, setUsers] = useState(api.users.fetchAll());
-    
     const getTableClasses = () => "table table-striped table-hover";
     const getQualityClasses = color => `badge bg-${color} btn-sm m-2`;
     const getDeleteButtonClasses = () => "btn btn-danger";
@@ -54,11 +53,9 @@ const Users = () => {
         );
     };
 
-
-    return (
-        <>
-            <p>{renderHeaderText()}</p>
-            <table className={getTableClasses()}>
+    const renderTable = () => {
+        return users.length > 0 
+            ? <table className={getTableClasses()}>
                 <thead>
                     <tr>
                         <th scope="col">Имя</th>
@@ -72,7 +69,16 @@ const Users = () => {
                 <tbody>
                     {renderUsers()}
                 </tbody>
-            </table>
+            </table> 
+            : <div></div>;
+
+    };
+
+
+    return (
+        <>
+            {renderHeaderText()}
+            {renderTable()}
         </>
     );
 }
