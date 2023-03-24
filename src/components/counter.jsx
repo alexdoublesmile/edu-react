@@ -30,11 +30,7 @@ const Counter = () => {
     };
     
     return tags.length > 0 
-        ? <>
-            <ul>
-                {renderTags()}
-            </ul>
-        </> 
+        ? <ul>{renderTags()}</ul> 
         : <>
             <span className={badgeClasses}>{formatCount()}</span>
             <button className={buttonClasses} onClick={handleIncrement}>+</button>
