@@ -8,7 +8,7 @@ const Users = () => {
     const getQualityClasses = color => `badge bg-${color} btn-sm m-2`;
     const getDeleteButtonClasses = () => "btn btn-danger";
 
-    const renderHeaderText = () => <p>{getUsersNumberText()} are waiting for you</p>;
+    const renderHeaderText = () => <p className="btn btn-primary btn-lg">{getUsersNumberText()} are waiting for you</p>;
     
     const getUsersNumberText = () => {
         if (users.length > 0) {
