@@ -7,7 +7,7 @@ const Users = () => {
     const [users, setUsers] = useState(api.users.fetchAll());
     const getTableClasses = () => "table table-striped table-hover";
 
-    const handleDeleteUser = id => setUsers(prevState => prevState.filter(user => user._id !== id));
+    const handleDeleteUser = id => setUsers(users.filter(user => user._id !== id));
 
     const renderSearchStatus = () => <SearchStatus usersNumber={users.length} />;
 
@@ -22,8 +22,8 @@ const Users = () => {
     };
 
     const renderTable = () => {
-        return users.length > 0
-            ? <table className={getTableClasses()}>
+        return users.length > 0 && (
+            <table className={getTableClasses()}>
                 <thead>
                     <tr>
                         <th scope="col">Имя</th>
@@ -38,10 +38,8 @@ const Users = () => {
                     {renderUsers()}
                 </tbody>
             </table>
-            : <div></div>;
-
+        );
     };
-
 
     return (
         <>
