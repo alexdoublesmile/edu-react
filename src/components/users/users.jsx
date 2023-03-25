@@ -8,7 +8,7 @@ const Users = () => {
     const [users, setUsers] = useState(api.users.fetchAll());
     const getTableClasses = () => "table table-striped table-hover";
     const count = users.length;
-    const pageSize = 4;
+    const pageSize = 14;
 
     const handlePageClick = index => {
         console.log("page: ", index);

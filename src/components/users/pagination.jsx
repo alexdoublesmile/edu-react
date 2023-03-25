@@ -6,7 +6,8 @@ const Pagination = props => {
     const pagesCount = Math.ceil(itemsCount / pageSize)
     const pages = _.range(1, pagesCount + 1);
     
-    return ( 
+    return pages.length > 1 
+    ? ( 
         <nav>
             <ul className="pagination">
                 { pages.map(page => {
@@ -18,7 +19,8 @@ const Pagination = props => {
                 })}
             </ul>
         </nav>
-     );
+     ) 
+     : null;
 }
  
 export default Pagination;
