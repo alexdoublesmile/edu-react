@@ -25,7 +25,12 @@ const Pagination = ({
                             className={getPageClasses(pageIndex)} 
                             key={"page_" + pageIndex}
                         >
-                            <a className={pageLinkClasses} onClick={() => onPageChange(pageIndex)}>{pageIndex}</a>
+                            <button 
+                                className={pageLinkClasses} 
+                                onClick={() => onPageChange(pageIndex)}
+                            >
+                                {pageIndex}
+                            </button>
                         </li>
                     );
                 })}
