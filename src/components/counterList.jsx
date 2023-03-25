@@ -5,7 +5,7 @@ import Users from "./users";
 
 const CounterList = () => {
 
-    const [counterList, setCounterList] = useState([
+    const initialState = [
         {
             id: 0, 
             value: 0,
@@ -31,13 +31,16 @@ const CounterList = () => {
             value: 0,
             name: "Set"
         }    
-    ]);
-    
-    const renderCounterList = () => counterList.map(counter => renderCounter(counter));
+    ];
+
+    const [counterList, setCounterList] = useState(initialState);
     
     const handleDeleteButton = id => setCounterList(counterList.filter(counter => counter.id !== id));
     const handleIncrement = id => prevState => ++prevState;
     const handleDecrement = id => prevState => --prevState;
+    const handleClear = () => setCounterList(initialState);
+
+    const renderCounterList = () => counterList.map(counter => renderCounter(counter));
     
     const renderCounter = counter => {
         return (
@@ -54,6 +57,12 @@ const CounterList = () => {
     return (
         <>
             {renderCounterList()}
+            <button 
+                className="btn btn-danger btn-sm m-2"
+                onClick={handleClear}
+            >
+                Clear
+            </button>
         </>
     );
 };
