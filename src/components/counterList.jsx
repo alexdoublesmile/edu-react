@@ -36,9 +36,27 @@ const CounterList = () => {
     const [counterList, setCounterList] = useState(initialState);
     
     const handleDeleteButton = id => setCounterList(counterList.filter(counter => counter.id !== id));
-    const handleIncrement = id => prevState => ++prevState;
-    const handleDecrement = id => prevState => --prevState;
+    const handleIncrement = id => setCounterList(getIncrementedList(id));
+    const handleDecrement = id => setCounterList(getDecrementedList(id));
     const handleClear = () => setCounterList(initialState);
+
+    const getIncrementedList = id => {
+        counterList.forEach(counter => {
+            if (counter.id === id) {
+                counter.value++;
+            }
+        });
+        return counterList;
+    }
+
+    const getDecrementedList = id => {
+        counterList.forEach(counter => {
+            if (counter.id === id) {
+                counter.value--;
+            }
+        });
+        return counterList;
+    }
 
     const renderCounterList = () => counterList.map(counter => renderCounter(counter));
     
