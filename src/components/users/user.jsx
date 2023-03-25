@@ -22,6 +22,9 @@ const User = props => {
             <td>{props.completedMeetings}</td>
             <td>{props.rate} / 5</td>
             <td>
+                <Bookmark />
+            </td>
+            <td>
                 <button
                     className={getDeleteButtonClasses()}
                     onClick={() => props.onDelete(props._id)}

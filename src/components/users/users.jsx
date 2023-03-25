@@ -31,6 +31,7 @@ const Users = () => {
                         <th scope="col">Профессия</th>
                         <th scope="col">Кол-во встреч</th>
                         <th scope="col">Оценка</th>
+                        <th scope="col">Избранное</th>
                         <th scope="col"></th>
                     </tr>
                 </thead>
