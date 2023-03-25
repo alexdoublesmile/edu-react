@@ -1,5 +1,6 @@
 import React from 'react';
-import Quality from "./quality"
+import Quality from "./quality";
+import Bookmark from "./bookmark";
 
 const User = props => {
     const deleteButtonText = "delete";
@@ -22,7 +23,11 @@ const User = props => {
             <td>{props.completedMeetings}</td>
             <td>{props.rate} / 5</td>
             <td>
-                <Bookmark />
+                <Bookmark 
+                    userId={props._id} 
+                    isMarked={props.bookmark} 
+                    onMark={props.onMark} 
+                />
             </td>
             <td>
                 <button

@@ -8,6 +8,16 @@ const Users = () => {
     const getTableClasses = () => "table table-striped table-hover";
 
     const handleDeleteUser = id => setUsers(users.filter(user => user._id !== id));
+    const handleMark = id => {
+        setUsers(
+            users.map(user => {
+                if (user._id === id) {
+                    return { ...user, bookmark: !user.bookmark };
+                }
+                return user;
+            })
+        );
+    };
 
     const renderSearchStatus = () => <SearchStatus usersNumber={users.length} />;
 
@@ -17,6 +27,7 @@ const Users = () => {
                 key={user._id} 
                 {...user} 
                 onDelete={handleDeleteUser} 
+                onMark={handleMark} 
             />
         );
     };
