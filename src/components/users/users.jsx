@@ -2,11 +2,17 @@ import React, { useState } from "react";
 import api from "../../api/index";
 import User from "./user"
 import SearchStatus from "./searchStatus"
+import Pagination from "./pagination"
 
 const Users = () => {
     const [users, setUsers] = useState(api.users.fetchAll());
     const getTableClasses = () => "table table-striped table-hover";
+    const count = users.length;
+    const pageSize = 4;
 
+    const handlePageClick = index => {
+        console.log("page: ", index);
+    };
     const handleDeleteUser = id => setUsers(users.filter(user => user._id !== id));
     const handleMark = id => {
         setUsers(
@@ -19,7 +25,7 @@ const Users = () => {
         );
     };
 
-    const renderSearchStatus = () => <SearchStatus usersNumber={users.length} />;
+    const renderSearchStatus = () => <SearchStatus usersNumber={count} />;
 
     const renderUsers = () => {
         return users.map(user => 
@@ -33,7 +39,7 @@ const Users = () => {
     };
 
     const renderTable = () => {
-        return users.length > 0 && (
+        return count > 0 && (
             <table className={getTableClasses()}>
                 <thead>
                     <tr>
@@ -57,6 +63,11 @@ const Users = () => {
         <>
             {renderSearchStatus()}
             {renderTable()}
+            <Pagination 
+                itemsCount={count}
+                pageSize={pageSize}
+                onPageChange={handlePageClick}
+            />
         </>
     );
 }
