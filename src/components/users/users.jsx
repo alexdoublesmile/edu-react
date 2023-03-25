@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import api from "../../api/index";
+import User from "./user"
+import SearchStatus from "./searchStatus"
+import Quality from "./quality"
 
 const Users = () => {
     const [users, setUsers] = useState(api.users.fetchAll());
@@ -9,15 +12,7 @@ const Users = () => {
 
     const handleDeleteUser = id => setUsers(prevState => prevState.filter(user => user._id !== id));
 
-    const renderHeaderText = () => <p className="btn btn-primary btn-lg">{getUsersNumberText()} waiting for you!</p>;
-
-    const getUsersNumberText = () => {
-        if (users.length > 0) {
-            return users.length > 1 ? `${users.length} persons are` : "1 person is"
-        } else {
-            return "Nobody is";
-        }
-    };
+    const renderSearchStatus = () => <SearchStatus usersNumber={users.length} />;
 
     const renderUsers = () => {
         return users.map(user => renderUser(user));
@@ -77,7 +72,7 @@ const Users = () => {
 
     return (
         <>
-            {renderHeaderText()}
+            {renderSearchStatus()}
             {renderTable()}
         </>
     );
