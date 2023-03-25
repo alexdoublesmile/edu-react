@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import api from "../api/index";
+import api from "../../api/index";
 
 const Users = () => {
     const [users, setUsers] = useState(api.users.fetchAll());
@@ -10,7 +10,7 @@ const Users = () => {
     const handleDeleteUser = id => setUsers(prevState => prevState.filter(user => user._id !== id));
 
     const renderHeaderText = () => <p className="btn btn-primary btn-lg">{getUsersNumberText()} waiting for you!</p>;
-    
+
     const getUsersNumberText = () => {
         if (users.length > 0) {
             return users.length > 1 ? `${users.length} persons are` : "1 person is"
@@ -21,7 +21,7 @@ const Users = () => {
 
     const renderUsers = () => {
         return users.map(user => renderUser(user));
-    };   
+    };
 
     const renderUser = user => {
         return (
@@ -32,7 +32,7 @@ const Users = () => {
                 <td>{user.completedMeetings}</td>
                 <td>{user.rate} / 5</td>
                 <td>
-                    <button 
+                    <button
                         className={getDeleteButtonClasses()}
                         onClick={() => handleDeleteUser(user._id)}
                     >
@@ -44,8 +44,8 @@ const Users = () => {
     };
 
     const renderQualities = qualities => {
-        return qualities.map(quality => 
-            <span 
+        return qualities.map(quality =>
+            <span
                 className={getQualityClasses(quality.color)}
             >
                 {quality.name}
@@ -54,7 +54,7 @@ const Users = () => {
     };
 
     const renderTable = () => {
-        return users.length > 0 
+        return users.length > 0
             ? <table className={getTableClasses()}>
                 <thead>
                     <tr>
@@ -69,7 +69,7 @@ const Users = () => {
                 <tbody>
                     {renderUsers()}
                 </tbody>
-            </table> 
+            </table>
             : <div></div>;
 
     };

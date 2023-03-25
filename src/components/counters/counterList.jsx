@@ -1,40 +1,39 @@
 import React, { useState } from "react";
 
 import Counter from "./counter";
-import Users from "./users";
 
 const CounterList = () => {
 
     const initialState = [
         {
-            id: 0, 
+            id: 0,
             value: 0,
             name: "Trash"
         },
         {
-            id: 1, 
+            id: 1,
             value: 0,
             name: "Spoon"
         },
         {
-            id: 2, 
+            id: 2,
             value: 0,
             name: "Fork"
         },
         {
-            id: 3, 
+            id: 3,
             value: 0,
             name: "Plate"
         },
         {
-            id: 4, 
+            id: 4,
             value: 0,
             name: "Set"
-        }    
+        }
     ];
 
     const [counterList, setCounterList] = useState(initialState);
-    
+
     const handleDeleteButton = id => setCounterList(counterList.filter(counter => counter.id !== id));
     const handleIncrement = id => setCounterList(getIncrementedList(id));
     const handleDecrement = id => setCounterList(getDecrementedList(id));
@@ -59,15 +58,15 @@ const CounterList = () => {
     }
 
     const renderCounterList = () => counterList.map(counter => renderCounter(counter));
-    
+
     const renderCounter = counter => {
         return (
-            <Counter 
-                key={counter.id} 
-                onDelete={handleDeleteButton} 
+            <Counter
+                key={counter.id}
+                onDelete={handleDeleteButton}
                 onIncrement={handleIncrement}
                 onDecrement={handleDecrement}
-                {...counter} 
+                {...counter}
             />
         );
     };
@@ -75,7 +74,7 @@ const CounterList = () => {
     return (
         <>
             {renderCounterList()}
-            <button 
+            <button
                 className="btn btn-danger btn-sm m-2"
                 onClick={handleClear}
             >
