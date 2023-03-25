@@ -35,13 +35,19 @@ const CounterList = () => {
     
     const renderCounterList = () => counterList.map(counter => renderCounter(counter));
     
-    const handleDeleteButton = id => {
-        setCounterList(counterList.filter(counter => counter.id !== id));
-    }
+    const handleDeleteButton = id => setCounterList(counterList.filter(counter => counter.id !== id));
+    const handleIncrement = id => prevState => ++prevState;
+    const handleDecrement = id => prevState => --prevState;
     
     const renderCounter = counter => {
         return (
-            <Counter key={counter.id} onDelete={handleDeleteButton} {...counter} />
+            <Counter 
+                key={counter.id} 
+                onDelete={handleDeleteButton} 
+                onIncrement={handleIncrement}
+                onDecrement={handleDecrement}
+                {...counter} 
+            />
         );
     };
 
