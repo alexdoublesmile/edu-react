@@ -41,21 +41,21 @@ const CounterList = () => {
     const handleClear = () => setCounterList(initialState);
 
     const getIncrementedList = id => {
-        counterList.forEach(counter => {
-            if (counter.id === id) {
-                counter.value++;
-            }
-        });
-        return counterList;
+        const index = counterList.findIndex(counter => counter.id === id);
+
+        const updatedData = [...counterList];
+        updatedData[index].value++;
+
+        return updatedData;
     }
 
     const getDecrementedList = id => {
-        counterList.forEach(counter => {
-            if (counter.id === id) {
-                counter.value--;
-            }
-        });
-        return counterList;
+        const index = counterList.findIndex(counter => counter.id === id);
+
+        const updatedData = [...counterList];
+        updatedData[index].value--;
+
+        return updatedData;
     }
 
     const renderCounterList = () => counterList.map(counter => renderCounter(counter));
