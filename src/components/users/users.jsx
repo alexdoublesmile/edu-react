@@ -8,11 +8,10 @@ const Users = () => {
     const [users, setUsers] = useState(api.users.fetchAll());
     const getTableClasses = () => "table table-striped table-hover";
     const count = users.length;
-    const pageSize = 14;
+    const pageSize = 4;
+    const [currentPage, setCurrentPage] = useState(1);
 
-    const handlePageClick = index => {
-        console.log("page: ", index);
-    };
+    const handlePageClick = index => setCurrentPage(index);
     const handleDeleteUser = id => setUsers(users.filter(user => user._id !== id));
     const handleMark = id => {
         setUsers(
@@ -66,6 +65,7 @@ const Users = () => {
             <Pagination 
                 itemsCount={count}
                 pageSize={pageSize}
+                currentPage={currentPage}
                 onPageChange={handlePageClick}
             />
         </>
