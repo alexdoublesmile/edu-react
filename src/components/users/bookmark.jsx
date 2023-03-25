@@ -1,12 +1,12 @@
 import React from 'react';
 
 
-const Bookmark = props => {
+const Bookmark = userProps => {
     return ( 
         <button 
-            onClick={() => props.onMark(props.userId)}
+            onClick={() => userProps.onMark(userProps.id)}
         >
-            <i className={"bi bi-bookmark" + (props.isMarked ? "-heart-fill" : "")}></i>
+            <i className={"bi bi-bookmark" + (userProps.isMarked ? "-heart-fill" : "")}></i>
         </button>
      );
 }

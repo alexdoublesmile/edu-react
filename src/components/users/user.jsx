@@ -24,7 +24,7 @@ const User = props => {
             <td>{props.rate} / 5</td>
             <td>
                 <Bookmark 
-                    userId={props._id} 
+                    id={props._id} 
                     isMarked={props.bookmark} 
                     onMark={props.onMark} 
                 />
