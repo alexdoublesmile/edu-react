@@ -3,13 +3,15 @@ import api from "../../api/index";
 import User from "./user"
 import SearchStatus from "./searchStatus"
 import Pagination from "./pagination"
+import { paginateManually } from "../../utils/paginate";
 
 const Users = () => {
     const [users, setUsers] = useState(api.users.fetchAll());
     const getTableClasses = () => "table table-striped table-hover";
     const count = users.length;
-    const pageSize = 4;
+    const pageSize = 5;
     const [currentPage, setCurrentPage] = useState(1);
+    const usersPage = paginateManually(users, currentPage, pageSize);
 
     const handlePageClick = index => setCurrentPage(index);
     const handleDeleteUser = id => setUsers(users.filter(user => user._id !== id));
@@ -27,7 +29,7 @@ const Users = () => {
     const renderSearchStatus = () => <SearchStatus usersNumber={count} />;
 
     const renderUsers = () => {
-        return users.map(user => 
+        return usersPage.map(user => 
             <User 
                 key={user._id} 
                 {...user} 
