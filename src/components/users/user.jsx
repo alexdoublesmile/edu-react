@@ -1,19 +1,15 @@
-import React from 'react';
+import React from "react";
 import Quality from "./quality";
 import Bookmark from "./bookmark";
 
-const User = props => {
+const User = (props) => {
     const deleteButtonText = "delete";
     const getDeleteButtonClasses = () => "btn btn-danger";
 
-    const renderQualities = qualities => qualities.map(quality => {
-        return (
-            <Quality 
-                key={quality._id} 
-                {...quality} 
-            />
-        );
-    });
+    const renderQualities = (qualities) =>
+        qualities.map((quality) => {
+            return <Quality key={quality._id} {...quality} />;
+        });
 
     return (
         <tr>
@@ -23,10 +19,10 @@ const User = props => {
             <td>{props.completedMeetings}</td>
             <td>{props.rate} / 5</td>
             <td>
-                <Bookmark 
-                    id={props._id} 
-                    isMarked={props.bookmark} 
-                    onMark={props.onMark} 
+                <Bookmark
+                    id={props._id}
+                    isMarked={props.bookmark}
+                    onMark={props.onMark}
                 />
             </td>
             <td>
@@ -39,6 +35,6 @@ const User = props => {
             </td>
         </tr>
     );
-}
+};
 
 export default User;

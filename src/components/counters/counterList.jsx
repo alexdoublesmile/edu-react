@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import Counter from "./counter";
 
 const CounterList = () => {
-
     const initialState = [
         {
             id: 0,
@@ -34,32 +33,34 @@ const CounterList = () => {
 
     const [counterList, setCounterList] = useState(initialState);
 
-    const handleDeleteButton = id => setCounterList(counterList.filter(counter => counter.id !== id));
-    const handleIncrement = id => setCounterList(getIncrementedList(id));
-    const handleDecrement = id => setCounterList(getDecrementedList(id));
+    const handleDeleteButton = (id) =>
+        setCounterList(counterList.filter((counter) => counter.id !== id));
+    const handleIncrement = (id) => setCounterList(getIncrementedList(id));
+    const handleDecrement = (id) => setCounterList(getDecrementedList(id));
     const handleClear = () => setCounterList(initialState);
 
-    const getIncrementedList = id => {
-        const index = counterList.findIndex(counter => counter.id === id);
+    const getIncrementedList = (id) => {
+        const index = counterList.findIndex((counter) => counter.id === id);
 
         const updatedData = [...counterList];
         updatedData[index].value++;
 
         return updatedData;
-    }
+    };
 
-    const getDecrementedList = id => {
-        const index = counterList.findIndex(counter => counter.id === id);
+    const getDecrementedList = (id) => {
+        const index = counterList.findIndex((counter) => counter.id === id);
 
         const updatedData = [...counterList];
         updatedData[index].value--;
 
         return updatedData;
-    }
+    };
 
-    const renderCounterList = () => counterList.map(counter => renderCounter(counter));
+    const renderCounterList = () =>
+        counterList.map((counter) => renderCounter(counter));
 
-    const renderCounter = counter => {
+    const renderCounter = (counter) => {
         return (
             <Counter
                 key={counter.id}
@@ -74,10 +75,7 @@ const CounterList = () => {
     return (
         <>
             {renderCounterList()}
-            <button
-                className="btn btn-danger btn-sm m-2"
-                onClick={handleClear}
-            >
+            <button className="btn btn-danger btn-sm m-2" onClick={handleClear}>
                 Clear
             </button>
         </>
