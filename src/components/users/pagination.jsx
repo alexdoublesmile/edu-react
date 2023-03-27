@@ -10,27 +10,29 @@ const Pagination = ({ itemsCount, pageSize, currentPage, onPageChange }) => {
     const getPageClasses = (pageIndex) =>
         pageIndex === currentPage ? "page-item active" : "page-item";
 
-    return pageIndexes.length > 1 ? (
-        <nav>
-            <ul className="pagination">
-                {pageIndexes.map((pageIndex) => {
-                    return (
-                        <li
-                            className={getPageClasses(pageIndex)}
-                            key={"page_" + pageIndex}
-                        >
-                            <button
-                                className={pageLinkClasses}
-                                onClick={() => onPageChange(pageIndex)}
+    return pageIndexes.length > 1
+        ? (
+            <nav>
+                <ul className="pagination">
+                    {pageIndexes.map((pageIndex) => {
+                        return (
+                            <li
+                                className={getPageClasses(pageIndex)}
+                                key={"page_" + pageIndex}
                             >
-                                {pageIndex}
-                            </button>
-                        </li>
-                    );
-                })}
-            </ul>
-        </nav>
-    ) : null;
+                                <button
+                                    className={pageLinkClasses}
+                                    onClick={() => onPageChange(pageIndex)}
+                                >
+                                    {pageIndex}
+                                </button>
+                            </li>
+                        );
+                    })}
+                </ul>
+            </nav>
+        )
+        : null;
 };
 
 Pagination.propTypes = {

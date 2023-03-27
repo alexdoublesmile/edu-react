@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const SearchStatus = (props) => {
     const getUsersNumberText = (num) => {
@@ -15,6 +16,10 @@ const SearchStatus = (props) => {
     )} waiting for you!`;
 
     return <p className={statusClasses}>{statusMsg}</p>;
+};
+
+SearchStatus.propTypes = {
+    usersNumber: PropTypes.number.isRequired
 };
 
 export default SearchStatus;

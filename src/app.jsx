@@ -1,6 +1,6 @@
 import React from "react";
 
-import CounterList from "./components/counters/counterList";
+// import CounterList from "./components/counters/counterList";
 import Users from "./components/users/users";
 
 // const App = () => <CounterList />;
