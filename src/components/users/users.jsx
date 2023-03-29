@@ -5,41 +5,15 @@ import SearchStatus from "./searchStatus";
 import Pagination from "./pagination";
 import GroupList from "./groupList";
 import { paginateManually } from "../../utils/paginate";
+import PropTypes from "prop-types";
 
-const Users = () => {
+const Users = ({ users, onDelete, onMark }) => {
     const pageSize = 2;
-    const [users, setUsers] = useState(api.users.fetchAll());
     const [professions, setProfessions] = useState();
     const [selectedProfession, setSelectedProfession] = useState();
     const [currentPage, setCurrentPage] = useState(1);
     const getTableClasses = () => "table table-striped table-hover";
 
-    const filterByProfession = (users, profession) => {
-        return selectedProfession
-            ? users.filter(user => user.profession === profession)
-            : users;
-    };
-
-    const filteredUsers = filterByProfession(users, selectedProfession);
-    const usersPage = paginateManually(filteredUsers, currentPage, pageSize);
-    const count = filteredUsers.length;
-
-    const handlePageClick = (index) => setCurrentPage(index);
-    const handleDeleteUser = (id) =>
-        setUsers(users.filter((user) => user._id !== id));
-    const handleMark = (id) => {
-        setUsers(
-            users.map((user) => {
-                if (user._id === id) {
-                    return { ...user, bookmark: !user.bookmark };
-                }
-                return user;
-            })
-        );
-    };
-    const handleProfessionSelect = item => {
-        setSelectedProfession(item);
-    };
     const clearFilters = () => setSelectedProfession();
 
     useEffect(() => {
@@ -50,16 +24,38 @@ const Users = () => {
         setCurrentPage(1);
     }, [selectedProfession]);
 
+    const filterByProfession = users => {
+        return selectedProfession
+            ? users.filter((user) =>
+                JSON.stringify(user.profession) ===
+                JSON.stringify(selectedProfession)
+            )
+            : users;
+    };
+
+    const filteredUsers = filterByProfession(users);
+    const usersPage = paginateManually(filteredUsers, currentPage, pageSize);
+    const count = filteredUsers.length;
+
+    const handlePageClick = (index) => setCurrentPage(index);
+    const handleProfessionSelect = item => {
+        setSelectedProfession(item);
+    };
+
     const renderSearchStatus = () => <SearchStatus usersNumber={ count } />;
 
     const renderUsers = () => {
         return usersPage.map((user) => (
-            <User
-                key={user._id}
-                {...user}
-                onDelete={handleDeleteUser}
-                onMark={handleMark}
-            />
+            <>
+                {users && (
+                    <User
+                        key={user._id}
+                        {...user}
+                        onDelete={onDelete}
+                        onMark={onMark}
+                    />
+                )}
+            </>
         ));
     };
 
@@ -117,6 +113,12 @@ const Users = () => {
             {renderTable()}
         </>
     );
+};
+
+Users.propTypes = {
+    users: PropTypes.array.isRequired,
+    onDelete: PropTypes.func.isRequired,
+    onMark: PropTypes.func.isRequired
 };
 
 export default Users;
