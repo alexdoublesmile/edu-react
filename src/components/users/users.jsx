@@ -8,6 +8,7 @@ import { paginateManually } from "../../utils/paginate";
 
 const Users = () => {
     const [users, setUsers] = useState(api.users.fetchAll());
+    const [professions] = useState(api.professions.fetchAll());
     const getTableClasses = () => "table table-striped table-hover";
     const count = users.length;
     const pageSize = 5;
@@ -41,12 +42,16 @@ const Users = () => {
         ));
     };
 
+    const handleProfessionSelect = (params) => {
+        console.log(params);
+    };
+
     const renderTable = () => {
         return (
             <>
-                <GroupList />
+                <GroupList items = { professions } onItemSelect = { handleProfessionSelect } />
                 { count > 0 && (
-                    <table className={getTableClasses()}>
+                    <table className={ getTableClasses() }>
                         <thead>
                             <tr>
                                 <th scope="col">Имя</th>
