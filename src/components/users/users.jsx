@@ -41,6 +41,7 @@ const Users = () => {
         setSelectedProfession(item);
         setCurrentPage(1);
     };
+    const clearFilters = () => setSelectedProfession();
 
     useEffect(() => {
         api.professions.fetchAll()
@@ -64,11 +65,19 @@ const Users = () => {
         return (
             <>
                 { professions && (
-                    <GroupList
-                        items = { professions }
-                        selectedItem = { selectedProfession }
-                        onItemSelect = { handleProfessionSelect }
-                    />
+                    <>
+                        <GroupList
+                            items = { professions }
+                            selectedItem = { selectedProfession }
+                            onItemSelect = { handleProfessionSelect }
+                        />
+                        <button
+                            className="btn btn-secondary mt-2"
+                            onClick={ clearFilters }
+                        >
+                            Clear filters
+                        </button>
+                    </>
                 )}
                 { count > 0 && (
                     <table className={ getTableClasses() }>
