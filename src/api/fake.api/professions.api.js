@@ -7,6 +7,10 @@ export const professions = {
     cook: { _id: "67rdca3eeb7f6fgeed471829", name: "Повар" }
 };
 
-export function fetchAll() {
+function fetchAll() {
     return professions;
 }
+
+export default {
+    fetchAll
+};
