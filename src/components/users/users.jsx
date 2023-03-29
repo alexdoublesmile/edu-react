@@ -9,12 +9,20 @@ import { paginateManually } from "../../utils/paginate";
 const Users = () => {
     const [users, setUsers] = useState(api.users.fetchAll());
     const [professions, setProfessions] = useState();
-    const [selectedItem, setselectedItem] = useState();
+    const [selectedProfession, setSelectedProfession] = useState();
     const [currentPage, setCurrentPage] = useState(1);
     const count = users.length;
     const pageSize = 5;
     const getTableClasses = () => "table table-striped table-hover";
-    const usersPage = paginateManually(users, currentPage, pageSize);
+
+    const filterByProfession = (users, profession) => {
+        return selectedProfession
+            ? users.filter(user => user.profession === profession)
+            : users;
+    };
+
+    const filteredUsers = filterByProfession(users, selectedProfession);
+    const usersPage = paginateManually(filteredUsers, currentPage, pageSize);
 
     const handlePageClick = (index) => setCurrentPage(index);
     const handleDeleteUser = (id) =>
@@ -29,7 +37,7 @@ const Users = () => {
             })
         );
     };
-    const handleProfessionSelect = item => setselectedItem(item);
+    const handleProfessionSelect = item => setSelectedProfession(item);
 
     useEffect(() => {
         api.professions.fetchAll()
@@ -55,7 +63,7 @@ const Users = () => {
                 { professions && (
                     <GroupList
                         items = { professions }
-                        selectedItem = { selectedItem }
+                        selectedItem = { selectedProfession }
                         onItemSelect = { handleProfessionSelect }
                     />
                 )}
