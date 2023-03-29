@@ -44,7 +44,7 @@ const Users = () => {
     const renderTable = () => {
         return (
             <>
-                <GroupList />
+                <GroupList items={userList} />
                 { count > 0 && (
                     <table className={getTableClasses()}>
                         <thead>
