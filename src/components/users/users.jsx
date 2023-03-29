@@ -65,52 +65,56 @@ const Users = () => {
 
     const renderTable = () => {
         return (
-            <>
-                { professions && (
-                    <>
+            <div className="d-flex">
+                {professions && (
+                    <div className="d-flex flex-column flex-shrink-0 p-3">
                         <GroupList
-                            items = { professions }
-                            selectedItem = { selectedProfession }
-                            onItemSelect = { handleProfessionSelect }
+                            items = {professions}
+                            selectedItem = {selectedProfession}
+                            onItemSelect = {handleProfessionSelect}
                         />
                         <button
                             className="btn btn-secondary mt-2"
-                            onClick={ clearFilters }
+                            onClick={clearFilters}
                         >
                             Clear filters
                         </button>
-                    </>
+                    </div>
                 )}
-                { count > 0 && (
-                    <table className={ getTableClasses() }>
-                        <thead>
-                            <tr>
-                                <th scope="col">Имя</th>
-                                <th scope="col">Качества</th>
-                                <th scope="col">Профессия</th>
-                                <th scope="col">Кол-во встреч</th>
-                                <th scope="col">Оценка</th>
-                                <th scope="col">Избранное</th>
-                                <th scope="col"></th>
-                            </tr>
-                        </thead>
-                        <tbody>{renderUsers()}</tbody>
-                    </table>
-                ) }
-            </>
+                <div className="d-flex flex-column">
+                    {renderSearchStatus()}
+                    {count > 0 && (
+                        <table className={getTableClasses()}>
+                            <thead>
+                                <tr>
+                                    <th scope="col">Имя</th>
+                                    <th scope="col">Качества</th>
+                                    <th scope="col">Профессия</th>
+                                    <th scope="col">Кол-во встреч</th>
+                                    <th scope="col">Оценка</th>
+                                    <th scope="col">Избранное</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody>{renderUsers()}</tbody>
+                        </table>
+                    )}
+                    <div className="d-flex justify-content-center">
+                        <Pagination
+                            itemsCount={count}
+                            pageSize={pageSize}
+                            currentPage={currentPage}
+                            onPageChange={handlePageClick}
+                        />
+                    </div>
+                </div>
+            </div>
         );
     };
 
     return (
         <>
-            {renderSearchStatus()}
             {renderTable()}
-            <Pagination
-                itemsCount={count}
-                pageSize={pageSize}
-                currentPage={currentPage}
-                onPageChange={handlePageClick}
-            />
         </>
     );
 };
