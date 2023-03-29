@@ -16,7 +16,7 @@ const App = () => {
         setUsers(users.filter((user) => user._id !== id));
     const handleMark = (id) => {
         setUsers(
-            users.filter((user) => {
+            users.map((user) => {
                 if (user._id === id) {
                     return { ...user, bookmark: !user.bookmark };
                 }
