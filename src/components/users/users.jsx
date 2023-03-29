@@ -7,7 +7,7 @@ import GroupList from "./groupList";
 import { paginateManually } from "../../utils/paginate";
 
 const Users = () => {
-    const pageSize = 5;
+    const pageSize = 2;
     const [users, setUsers] = useState(api.users.fetchAll());
     const [professions, setProfessions] = useState();
     const [selectedProfession, setSelectedProfession] = useState();
@@ -39,7 +39,6 @@ const Users = () => {
     };
     const handleProfessionSelect = item => {
         setSelectedProfession(item);
-        setCurrentPage(1);
     };
     const clearFilters = () => setSelectedProfession();
 
@@ -47,6 +46,9 @@ const Users = () => {
         api.professions.fetchAll()
             .then((data) => { setProfessions(data); });
     }, []);
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [selectedProfession]);
 
     const renderSearchStatus = () => <SearchStatus usersNumber={ count } />;
 
