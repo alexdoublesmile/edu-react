@@ -3,6 +3,7 @@ import api from "../../api/index";
 import User from "./user";
 import SearchStatus from "./searchStatus";
 import Pagination from "./pagination";
+import GroupList from "./groupList";
 import { paginateManually } from "../../utils/paginate";
 
 const Users = () => {
@@ -42,22 +43,25 @@ const Users = () => {
 
     const renderTable = () => {
         return (
-            count > 0 && (
-                <table className={getTableClasses()}>
-                    <thead>
-                        <tr>
-                            <th scope="col">Имя</th>
-                            <th scope="col">Качества</th>
-                            <th scope="col">Профессия</th>
-                            <th scope="col">Кол-во встреч</th>
-                            <th scope="col">Оценка</th>
-                            <th scope="col">Избранное</th>
-                            <th scope="col"></th>
-                        </tr>
-                    </thead>
-                    <tbody>{renderUsers()}</tbody>
-                </table>
-            )
+            <>
+                <GroupList />
+                { count > 0 && (
+                    <table className={getTableClasses()}>
+                        <thead>
+                            <tr>
+                                <th scope="col">Имя</th>
+                                <th scope="col">Качества</th>
+                                <th scope="col">Профессия</th>
+                                <th scope="col">Кол-во встреч</th>
+                                <th scope="col">Оценка</th>
+                                <th scope="col">Избранное</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>{renderUsers()}</tbody>
+                    </table>
+                ) }
+            </>
         );
     };
 
