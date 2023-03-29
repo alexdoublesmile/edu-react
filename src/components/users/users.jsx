@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import api from "../../api/index";
 import User from "./user";
 import SearchStatus from "./searchStatus";
@@ -8,7 +8,7 @@ import { paginateManually } from "../../utils/paginate";
 
 const Users = () => {
     const [users, setUsers] = useState(api.users.fetchAll());
-    const [professions] = useState(api.professions.fetchAll());
+    const [professions, setProfessions] = useState();
     const getTableClasses = () => "table table-striped table-hover";
     const count = users.length;
     const pageSize = 5;
@@ -29,6 +29,19 @@ const Users = () => {
         );
     };
 
+    const handleProfessionSelect = (params) => {
+        console.log(params);
+    };
+
+    useEffect(() => {
+        console.log("send request");
+        setProfessions(api.professions.fetchAll());
+    }, []);
+
+    useEffect(() => {
+        console.log("professions status is ", professions);
+    }, [professions]);
+
     const renderSearchStatus = () => <SearchStatus usersNumber={count} />;
 
     const renderUsers = () => {
@@ -40,10 +53,6 @@ const Users = () => {
                 onMark={handleMark}
             />
         ));
-    };
-
-    const handleProfessionSelect = (params) => {
-        console.log(params);
     };
 
     const renderTable = () => {
