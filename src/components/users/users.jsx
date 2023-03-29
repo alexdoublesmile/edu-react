@@ -34,13 +34,9 @@ const Users = () => {
     };
 
     useEffect(() => {
-        console.log("send request");
-        setProfessions(api.professions.fetchAll());
+        api.professions.fetchAll()
+            .then((data) => { setProfessions(data); });
     }, []);
-
-    useEffect(() => {
-        console.log("professions status is ", professions);
-    }, [professions]);
 
     const renderSearchStatus = () => <SearchStatus usersNumber={count} />;
 
@@ -58,7 +54,10 @@ const Users = () => {
     const renderTable = () => {
         return (
             <>
-                <GroupList items = { professions } onItemSelect = { handleProfessionSelect } />
+                <GroupList
+                    items = { professions }
+                    onItemSelect = { handleProfessionSelect }
+                />
                 { count > 0 && (
                     <table className={ getTableClasses() }>
                         <thead>
