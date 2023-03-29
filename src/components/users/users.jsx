@@ -7,12 +7,11 @@ import GroupList from "./groupList";
 import { paginateManually } from "../../utils/paginate";
 
 const Users = () => {
+    const pageSize = 5;
     const [users, setUsers] = useState(api.users.fetchAll());
     const [professions, setProfessions] = useState();
     const [selectedProfession, setSelectedProfession] = useState();
     const [currentPage, setCurrentPage] = useState(1);
-    const count = users.length;
-    const pageSize = 5;
     const getTableClasses = () => "table table-striped table-hover";
 
     const filterByProfession = (users, profession) => {
@@ -23,6 +22,7 @@ const Users = () => {
 
     const filteredUsers = filterByProfession(users, selectedProfession);
     const usersPage = paginateManually(filteredUsers, currentPage, pageSize);
+    const count = filteredUsers.length;
 
     const handlePageClick = (index) => setCurrentPage(index);
     const handleDeleteUser = (id) =>
@@ -104,7 +104,7 @@ const Users = () => {
             {renderSearchStatus()}
             {renderTable()}
             <Pagination
-                itemsCount={filteredUsers.length}
+                itemsCount={count}
                 pageSize={pageSize}
                 currentPage={currentPage}
                 onPageChange={handlePageClick}
