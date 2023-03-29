@@ -9,10 +9,11 @@ import { paginateManually } from "../../utils/paginate";
 const Users = () => {
     const [users, setUsers] = useState(api.users.fetchAll());
     const [professions, setProfessions] = useState();
-    const getTableClasses = () => "table table-striped table-hover";
+    const [selectedItem, setselectedItem] = useState();
+    const [currentPage, setCurrentPage] = useState(1);
     const count = users.length;
     const pageSize = 5;
-    const [currentPage, setCurrentPage] = useState(1);
+    const getTableClasses = () => "table table-striped table-hover";
     const usersPage = paginateManually(users, currentPage, pageSize);
 
     const handlePageClick = (index) => setCurrentPage(index);
@@ -28,17 +29,14 @@ const Users = () => {
             })
         );
     };
-
-    const handleProfessionSelect = (params) => {
-        console.log(params);
-    };
+    const handleProfessionSelect = item => setselectedItem(item);
 
     useEffect(() => {
         api.professions.fetchAll()
             .then((data) => { setProfessions(data); });
     }, []);
 
-    const renderSearchStatus = () => <SearchStatus usersNumber={count} />;
+    const renderSearchStatus = () => <SearchStatus usersNumber={ count } />;
 
     const renderUsers = () => {
         return usersPage.map((user) => (
@@ -57,8 +55,7 @@ const Users = () => {
                 { professions && (
                     <GroupList
                         items = { professions }
-                        valueProperty = { "_id" }
-                        contentProperty = { "name" }
+                        selectedItem = { selectedItem }
                         onItemSelect = { handleProfessionSelect }
                     />
                 )}
