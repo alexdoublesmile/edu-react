@@ -37,7 +37,10 @@ const Users = () => {
             })
         );
     };
-    const handleProfessionSelect = item => setSelectedProfession(item);
+    const handleProfessionSelect = item => {
+        setSelectedProfession(item);
+        setCurrentPage(1);
+    };
 
     useEffect(() => {
         api.professions.fetchAll()
@@ -92,7 +95,7 @@ const Users = () => {
             {renderSearchStatus()}
             {renderTable()}
             <Pagination
-                itemsCount={count}
+                itemsCount={filteredUsers.length}
                 pageSize={pageSize}
                 currentPage={currentPage}
                 onPageChange={handlePageClick}
