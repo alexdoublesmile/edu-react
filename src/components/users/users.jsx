@@ -54,10 +54,14 @@ const Users = () => {
     const renderTable = () => {
         return (
             <>
-                <GroupList
-                    items = { professions }
-                    onItemSelect = { handleProfessionSelect }
-                />
+                { professions && (
+                    <GroupList
+                        items = { professions }
+                        valueProperty = { "_id" }
+                        contentProperty = { "name" }
+                        onItemSelect = { handleProfessionSelect }
+                    />
+                )}
                 { count > 0 && (
                     <table className={ getTableClasses() }>
                         <thead>
