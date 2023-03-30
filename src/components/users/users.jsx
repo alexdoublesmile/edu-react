@@ -72,8 +72,8 @@ const Users = ({ users, onDelete, onMark }) => {
                         users={usersPage}
                         onDelete={onDelete}
                         onMark={onMark}
-                        onSortedBy={handleSortedBy}
-                        sortBy={sortBy}
+                        onSort={handleSortedBy}
+                        selectedSort={sortBy}
                     />
                 )}
                 <div className="d-flex justify-content-center">
