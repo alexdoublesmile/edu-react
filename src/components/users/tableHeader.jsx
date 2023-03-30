@@ -12,6 +12,12 @@ const TableHeader = ({ onSort, selectedSort, columns }) => {
         onSort({ iter: sortBy, order: sortOrder });
     };
 
+    const getOnClickAction = column => {
+        return column.iter
+            ? () => handleSortBy(column.iter)
+            : undefined;
+    };
+
     return (
         <thead>
             <tr>
@@ -19,7 +25,8 @@ const TableHeader = ({ onSort, selectedSort, columns }) => {
                     <th
                         key={column}
                         scope="col"
-                        onClick={() => handleSortBy(columns[column].iter)}
+                        onClick={getOnClickAction(columns[column])}
+                        {...{ role: columns[column].iter && "button" }}
                     >
                         {columns[column].name}
                     </th>
