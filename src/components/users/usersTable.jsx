@@ -2,8 +2,18 @@ import React from "react";
 import User from "./user";
 import PropTypes from "prop-types";
 
-const UserTable = ({ users, onDelete, onMark, onSortedBy }) => {
+const UserTable = ({ users, onDelete, onMark, onSortedBy, sortBy }) => {
     const getTableClasses = () => "table table-striped table-hover";
+
+    const toggleOrder = order => order === "asc" ? "desc" : "asc";
+
+    const handleSortBy = sortedBy => {
+        let sortByOrder = "asc";
+        if (sortBy.iter === sortedBy) {
+            sortByOrder = toggleOrder(sortBy.order);
+        }
+        onSortedBy({ iter: sortedBy, order: sortByOrder });
+    };
 
     const renderUsers = () => {
         return users.map((user) => (
@@ -24,12 +34,12 @@ const UserTable = ({ users, onDelete, onMark, onSortedBy }) => {
         <table className={getTableClasses()}>
             <thead>
                 <tr>
-                    <th scope="col" onClick={() => onSortedBy("name")}>Имя</th>
+                    <th scope="col" onClick={() => handleSortBy("name")}>Имя</th>
                     <th scope="col">Качества</th>
-                    <th scope="col" onClick={() => onSortedBy("profession.name")}>Профессия</th>
-                    <th scope="col" onClick={() => onSortedBy("completedMeetings")}>Кол-во встреч</th>
-                    <th scope="col" onClick={() => onSortedBy("rate")}>Оценка</th>
-                    <th scope="col" onClick={() => onSortedBy("bookmark")}>Избранное</th>
+                    <th scope="col" onClick={() => handleSortBy("profession.name")}>Профессия</th>
+                    <th scope="col" onClick={() => handleSortBy("completedMeetings")}>Кол-во встреч</th>
+                    <th scope="col" onClick={() => handleSortBy("rate")}>Оценка</th>
+                    <th scope="col" onClick={() => handleSortBy("bookmark")}>Избранное</th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -42,7 +52,8 @@ UserTable.propTypes = {
     users: PropTypes.array.isRequired,
     onDelete: PropTypes.func.isRequired,
     onMark: PropTypes.func.isRequired,
-    onSortedBy: PropTypes.func.isRequired
+    onSortedBy: PropTypes.func.isRequired,
+    sortBy: PropTypes.object.isRequired
 };
 
 export default UserTable;

@@ -34,15 +34,8 @@ const Users = ({ users, onDelete, onMark }) => {
             : users;
     };
 
-    const toggleOrder = order => order === "asc" ? "desc" : "asc";
-
-    const handleSortedBy = sortedBy => {
-        console.log(sortedBy);
-        let sortByOrder = "asc";
-        if (sortBy.iter === sortedBy) {
-            sortByOrder = toggleOrder(sortBy.order);
-        }
-        setSortBy({ iter: sortedBy, order: sortByOrder });
+    const handleSortedBy = sortObject => {
+        setSortBy(sortObject);
     };
 
     const filteredUsers = filterByProfession(users);
@@ -80,6 +73,7 @@ const Users = ({ users, onDelete, onMark }) => {
                         onDelete={onDelete}
                         onMark={onMark}
                         onSortedBy={handleSortedBy}
+                        sortBy={sortBy}
                     />
                 )}
                 <div className="d-flex justify-content-center">
