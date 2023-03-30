@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from "react";
 import api from "../../api/index";
-import User from "./user";
 import SearchStatus from "./searchStatus";
 import Pagination from "./pagination";
 import GroupList from "./groupList";
 import { paginateManually } from "../../utils/paginate";
 import PropTypes from "prop-types";
+import UserTable from "./usersTable";
 
 const Users = ({ users, onDelete, onMark }) => {
     const pageSize = 2;
     const [professions, setProfessions] = useState();
     const [selectedProfession, setSelectedProfession] = useState();
     const [currentPage, setCurrentPage] = useState(1);
-    const getTableClasses = () => "table table-striped table-hover";
 
     const clearFilters = () => setSelectedProfession();
 
@@ -42,76 +41,42 @@ const Users = ({ users, onDelete, onMark }) => {
         setSelectedProfession(item);
     };
 
-    const renderSearchStatus = () => <SearchStatus usersNumber={ count } />;
-
-    const renderUsers = () => {
-        return usersPage.map((user) => (
-            <>
-                {users && (
-                    <User
-                        key={user._id}
-                        {...user}
+    return (
+        <div className="d-flex">
+            {professions && (
+                <div className="d-flex flex-column flex-shrink-0 p-3">
+                    <GroupList
+                        items = {professions}
+                        selectedItem = {selectedProfession}
+                        onItemSelect = {handleProfessionSelect}
+                    />
+                    <button
+                        className="btn btn-secondary mt-2"
+                        onClick={clearFilters}
+                    >
+                        Clear filters
+                    </button>
+                </div>
+            )}
+            <div className="d-flex flex-column">
+                <SearchStatus usersNumber={ count } />
+                {count > 0 && (
+                    <UserTable
+                        users={usersPage}
                         onDelete={onDelete}
                         onMark={onMark}
                     />
                 )}
-            </>
-        ));
-    };
-
-    const renderTable = () => {
-        return (
-            <div className="d-flex">
-                {professions && (
-                    <div className="d-flex flex-column flex-shrink-0 p-3">
-                        <GroupList
-                            items = {professions}
-                            selectedItem = {selectedProfession}
-                            onItemSelect = {handleProfessionSelect}
-                        />
-                        <button
-                            className="btn btn-secondary mt-2"
-                            onClick={clearFilters}
-                        >
-                            Clear filters
-                        </button>
-                    </div>
-                )}
-                <div className="d-flex flex-column">
-                    {renderSearchStatus()}
-                    {count > 0 && (
-                        <table className={getTableClasses()}>
-                            <thead>
-                                <tr>
-                                    <th scope="col">Имя</th>
-                                    <th scope="col">Качества</th>
-                                    <th scope="col">Профессия</th>
-                                    <th scope="col">Кол-во встреч</th>
-                                    <th scope="col">Оценка</th>
-                                    <th scope="col">Избранное</th>
-                                    <th scope="col"></th>
-                                </tr>
-                            </thead>
-                            <tbody>{renderUsers()}</tbody>
-                        </table>
-                    )}
-                    <div className="d-flex justify-content-center">
-                        <Pagination
-                            itemsCount={count}
-                            pageSize={pageSize}
-                            currentPage={currentPage}
-                            onPageChange={handlePageClick}
-                        />
-                    </div>
+                <div className="d-flex justify-content-center">
+                    <Pagination
+                        itemsCount={count}
+                        pageSize={pageSize}
+                        currentPage={currentPage}
+                        onPageChange={handlePageClick}
+                    />
                 </div>
             </div>
-        );
-    };
-
-    return (
-        <>
-            {renderTable()}
-        </>
+        </div>
     );
 };
 
