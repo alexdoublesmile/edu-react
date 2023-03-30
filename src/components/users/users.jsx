@@ -6,12 +6,14 @@ import GroupList from "./groupList";
 import { paginateManually } from "../../utils/paginate";
 import PropTypes from "prop-types";
 import UserTable from "./usersTable";
+import _ from "lodash";
 
 const Users = ({ users, onDelete, onMark }) => {
-    const pageSize = 2;
+    const pageSize = 8;
     const [professions, setProfessions] = useState();
     const [selectedProfession, setSelectedProfession] = useState();
     const [currentPage, setCurrentPage] = useState(1);
+    const [sortBy, setSortBy] = useState({ iter: "name", order: "asc" });
 
     const clearFilters = () => setSelectedProfession();
 
@@ -32,8 +34,20 @@ const Users = ({ users, onDelete, onMark }) => {
             : users;
     };
 
+    const toggleOrder = order => order === "asc" ? "desc" : "asc";
+
+    const handleSortedBy = sortedBy => {
+        console.log(sortedBy);
+        let sortByOrder = "asc";
+        if (sortBy.iter === sortedBy) {
+            sortByOrder = toggleOrder(sortBy.order);
+        }
+        setSortBy({ iter: sortedBy, order: sortByOrder });
+    };
+
     const filteredUsers = filterByProfession(users);
-    const usersPage = paginateManually(filteredUsers, currentPage, pageSize);
+    const sortedUsers = _.orderBy(filteredUsers, sortBy.iter, sortBy.order);
+    const usersPage = paginateManually(sortedUsers, currentPage, pageSize);
     const count = filteredUsers.length;
 
     const handlePageClick = (index) => setCurrentPage(index);
@@ -65,6 +79,7 @@ const Users = ({ users, onDelete, onMark }) => {
                         users={usersPage}
                         onDelete={onDelete}
                         onMark={onMark}
+                        onSortedBy={handleSortedBy}
                     />
                 )}
                 <div className="d-flex justify-content-center">
