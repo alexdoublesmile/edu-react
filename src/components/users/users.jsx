@@ -30,6 +30,13 @@ const Users = () => {
             })
         );
     };
+    const handleSortedBy = (sortObject) => {
+        setSortBy(sortObject);
+    };
+    const handlePageClick = (index) => setCurrentPage(index);
+    const handleProfessionSelect = (item) => {
+        setSelectedProfession(item);
+    };
 
     useEffect(() => {
         api.users.fetchAll().then((data) => {
@@ -50,26 +57,17 @@ const Users = () => {
         const filterByProfession = (users) => {
             return selectedProfession
                 ? users.filter(
-                      (user) =>
-                          JSON.stringify(user.profession) ===
-                          JSON.stringify(selectedProfession)
-                  )
+                    (user) =>
+                        JSON.stringify(user.profession) ===
+                        JSON.stringify(selectedProfession)
+                )
                 : users;
-        };
-
-        const handleSortedBy = (sortObject) => {
-            setSortBy(sortObject);
         };
 
         const filteredUsers = filterByProfession(users);
         const sortedUsers = _.orderBy(filteredUsers, sortBy.path, sortBy.order);
         const usersPage = paginateManually(sortedUsers, currentPage, pageSize);
         const count = filteredUsers.length;
-
-        const handlePageClick = (index) => setCurrentPage(index);
-        const handleProfessionSelect = (item) => {
-            setSelectedProfession(item);
-        };
 
         return (
             <div className="d-flex">
