@@ -1,12 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
+import Table from "./table";
 import TableHeader from "./tableHeader";
 import TableBody from "./tableBody";
 import Bookmark from "./bookmark";
 import QualitiesList from "./qualitiesList";
 
 const UserTable = ({ users, onDelete, onMark, onSort, selectedSort }) => {
-    const getTableClasses = () => "table table-striped table-hover";
     const getDeleteButtonClasses = () => "btn btn-danger";
     const deleteButtonText = "delete";
 
@@ -43,14 +43,15 @@ const UserTable = ({ users, onDelete, onMark, onSort, selectedSort }) => {
     };
 
     return (
-        <table className={getTableClasses()}>
-            <TableHeader
-                onSort={onSort}
-                selectedSort={selectedSort}
-                columns={columns}
-            />
+        <Table
+            onSort={onSort}
+            selectedSort={selectedSort}
+            columns={columns}
+            data={users}
+        >
+            <TableHeader {...{ onSort, selectedSort, columns }} />
             <TableBody {...{ data: users, columns }} />
-        </table>
+        </Table>
     );
 };
 
