@@ -13,7 +13,7 @@ const Users = ({ users, onDelete, onMark }) => {
     const [professions, setProfessions] = useState();
     const [selectedProfession, setSelectedProfession] = useState();
     const [currentPage, setCurrentPage] = useState(1);
-    const [sortBy, setSortBy] = useState({ iter: "name", order: "asc" });
+    const [sortBy, setSortBy] = useState({ path: "name", order: "asc" });
 
     const clearFilters = () => setSelectedProfession();
 
@@ -39,7 +39,7 @@ const Users = ({ users, onDelete, onMark }) => {
     };
 
     const filteredUsers = filterByProfession(users);
-    const sortedUsers = _.orderBy(filteredUsers, sortBy.iter, sortBy.order);
+    const sortedUsers = _.orderBy(filteredUsers, sortBy.path, sortBy.order);
     const usersPage = paginateManually(sortedUsers, currentPage, pageSize);
     const count = filteredUsers.length;
 

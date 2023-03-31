@@ -6,15 +6,15 @@ const TableHeader = ({ onSort, selectedSort, columns }) => {
 
     const handleSortBy = sortBy => {
         let sortOrder = "asc";
-        if (selectedSort.iter === sortBy) {
+        if (selectedSort.path === sortBy) {
             sortOrder = toggleOrder(selectedSort.order);
         }
-        onSort({ iter: sortBy, order: sortOrder });
+        onSort({ path: sortBy, order: sortOrder });
     };
 
     const getOnClickAction = column => {
-        return column.iter
-            ? () => handleSortBy(column.iter)
+        return column.path
+            ? () => handleSortBy(column.path)
             : undefined;
     };
 
@@ -26,7 +26,7 @@ const TableHeader = ({ onSort, selectedSort, columns }) => {
                         key={column}
                         scope="col"
                         onClick={getOnClickAction(columns[column])}
-                        {...{ role: columns[column].iter && "button" }}
+                        {...{ role: columns[column].path && "button" }}
                     >
                         {columns[column].name}
                     </th>

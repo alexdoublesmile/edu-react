@@ -7,12 +7,12 @@ const UserTable = ({ users, onDelete, onMark, onSort, selectedSort }) => {
     const getTableClasses = () => "table table-striped table-hover";
 
     const columns = {
-        name: { iter: "name", name: "Имя" },
+        name: { path: "name", name: "Имя" },
         qualities: { name: "Качества" },
-        professions: { iter: "profession.name", name: "Профессия" },
-        completedMeetings: { iter: "completedMeetings", name: "Кол-во встреч" },
-        rate: { iter: "rate", name: "Оценка" },
-        bookmark: { iter: "bookmark", name: "Избранное" },
+        professions: { path: "profession.name", name: "Профессия" },
+        completedMeetings: { path: "completedMeetings", name: "Кол-во встреч" },
+        rate: { path: "rate", name: "Оценка" },
+        bookmark: { path: "bookmark", name: "Избранное" },
         delete: {}
     };
 
