@@ -8,8 +8,9 @@ import PropTypes from "prop-types";
 import UserTable from "./usersTable";
 import _ from "lodash";
 
-const Users = ({ users, onDelete, onMark }) => {
+const Users = () => {
     const pageSize = 8;
+    const [users, setUsers] = useState();
     const [professions, setProfessions] = useState();
     const [selectedProfession, setSelectedProfession] = useState();
     const [currentPage, setCurrentPage] = useState(1);
@@ -17,76 +18,100 @@ const Users = ({ users, onDelete, onMark }) => {
 
     const clearFilters = () => setSelectedProfession();
 
+    const handleDeleteUser = (id) =>
+        setUsers(users.filter((user) => user._id !== id));
+    const handleMark = (id) => {
+        setUsers(
+            users.map((user) => {
+                if (user._id === id) {
+                    return { ...user, bookmark: !user.bookmark };
+                }
+                return user;
+            })
+        );
+    };
+
     useEffect(() => {
-        api.professions.fetchAll()
-            .then((data) => { setProfessions(data); });
+        api.users.fetchAll().then((data) => {
+            setUsers(data);
+        });
+    }, []);
+
+    useEffect(() => {
+        api.professions.fetchAll().then((data) => {
+            setProfessions(data);
+        });
     }, []);
     useEffect(() => {
         setCurrentPage(1);
     }, [selectedProfession]);
 
-    const filterByProfession = users => {
-        return selectedProfession
-            ? users.filter((user) =>
-                JSON.stringify(user.profession) ===
-                JSON.stringify(selectedProfession)
-            )
-            : users;
-    };
+    if (users) {
+        const filterByProfession = (users) => {
+            return selectedProfession
+                ? users.filter(
+                      (user) =>
+                          JSON.stringify(user.profession) ===
+                          JSON.stringify(selectedProfession)
+                  )
+                : users;
+        };
 
-    const handleSortedBy = sortObject => {
-        setSortBy(sortObject);
-    };
+        const handleSortedBy = (sortObject) => {
+            setSortBy(sortObject);
+        };
 
-    const filteredUsers = filterByProfession(users);
-    const sortedUsers = _.orderBy(filteredUsers, sortBy.path, sortBy.order);
-    const usersPage = paginateManually(sortedUsers, currentPage, pageSize);
-    const count = filteredUsers.length;
+        const filteredUsers = filterByProfession(users);
+        const sortedUsers = _.orderBy(filteredUsers, sortBy.path, sortBy.order);
+        const usersPage = paginateManually(sortedUsers, currentPage, pageSize);
+        const count = filteredUsers.length;
 
-    const handlePageClick = (index) => setCurrentPage(index);
-    const handleProfessionSelect = item => {
-        setSelectedProfession(item);
-    };
+        const handlePageClick = (index) => setCurrentPage(index);
+        const handleProfessionSelect = (item) => {
+            setSelectedProfession(item);
+        };
 
-    return (
-        <div className="d-flex">
-            {professions && (
-                <div className="d-flex flex-column flex-shrink-0 p-3">
-                    <GroupList
-                        items = {professions}
-                        selectedItem = {selectedProfession}
-                        onItemSelect = {handleProfessionSelect}
-                    />
-                    <button
-                        className="btn btn-secondary mt-2"
-                        onClick={clearFilters}
-                    >
-                        Clear filters
-                    </button>
-                </div>
-            )}
-            <div className="d-flex flex-column">
-                <SearchStatus usersNumber={ count } />
-                {count > 0 && (
-                    <UserTable
-                        users={usersPage}
-                        onDelete={onDelete}
-                        onMark={onMark}
-                        onSort={handleSortedBy}
-                        selectedSort={sortBy}
-                    />
+        return (
+            <div className="d-flex">
+                {professions && (
+                    <div className="d-flex flex-column flex-shrink-0 p-3">
+                        <GroupList
+                            items={professions}
+                            selectedItem={selectedProfession}
+                            onItemSelect={handleProfessionSelect}
+                        />
+                        <button
+                            className="btn btn-secondary mt-2"
+                            onClick={clearFilters}
+                        >
+                            Clear filters
+                        </button>
+                    </div>
                 )}
-                <div className="d-flex justify-content-center">
-                    <Pagination
-                        itemsCount={count}
-                        pageSize={pageSize}
-                        currentPage={currentPage}
-                        onPageChange={handlePageClick}
-                    />
+                <div className="d-flex flex-column">
+                    <SearchStatus usersNumber={count} />
+                    {count > 0 && (
+                        <UserTable
+                            users={usersPage}
+                            onDelete={handleDeleteUser}
+                            onMark={handleMark}
+                            onSort={handleSortedBy}
+                            selectedSort={sortBy}
+                        />
+                    )}
+                    <div className="d-flex justify-content-center">
+                        <Pagination
+                            itemsCount={count}
+                            pageSize={pageSize}
+                            currentPage={currentPage}
+                            onPageChange={handlePageClick}
+                        />
+                    </div>
                 </div>
             </div>
-        </div>
-    );
+        );
+    }
+    return "loading...";
 };
 
 Users.propTypes = {
