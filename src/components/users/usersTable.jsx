@@ -1,7 +1,8 @@
 import React from "react";
-import User from "./user";
+// import User from "./user";
 import PropTypes from "prop-types";
 import TableHeader from "./tableHeader";
+import TableBody from "./tableBody";
 
 const UserTable = ({ users, onDelete, onMark, onSort, selectedSort }) => {
     const getTableClasses = () => "table table-striped table-hover";
@@ -16,16 +17,16 @@ const UserTable = ({ users, onDelete, onMark, onSort, selectedSort }) => {
         delete: {}
     };
 
-    const renderUsers = () => {
-        return users.map((user) => (
-            <User
-                key={user._id}
-                {...user}
-                onDelete={onDelete}
-                onMark={onMark}
-            />
-        ));
-    };
+    // const renderUsers = () => {
+    //     return users.map((user) => (
+    //         <User
+    //             key={user._id}
+    //             {...user}
+    //             onDelete={onDelete}
+    //             onMark={onMark}
+    //         />
+    //     ));
+    // };
 
     return (
         <table className={getTableClasses()}>
@@ -34,7 +35,10 @@ const UserTable = ({ users, onDelete, onMark, onSort, selectedSort }) => {
                 selectedSort={selectedSort}
                 columns={columns}
             />
-            <tbody>{renderUsers()}</tbody>
+            <TableBody
+                {...{ data: users, columns }}
+            />
+            {/* <tbody>{renderUsers()}</tbody> */}
         </table>
     );
 };
