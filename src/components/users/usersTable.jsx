@@ -1,9 +1,9 @@
 import React from "react";
-// import User from "./user";
 import PropTypes from "prop-types";
 import TableHeader from "./tableHeader";
 import TableBody from "./tableBody";
 import Bookmark from "./bookmark";
+import QualitiesList from "./qualitiesList";
 
 const UserTable = ({ users, onDelete, onMark, onSort, selectedSort }) => {
     const getTableClasses = () => "table table-striped table-hover";
@@ -12,14 +12,17 @@ const UserTable = ({ users, onDelete, onMark, onSort, selectedSort }) => {
 
     const columns = {
         name: { path: "name", name: "Имя" },
-        qualities: { name: "Качества" },
+        qualities: {
+            name: "Качества",
+            component: (user) => <QualitiesList qualities={user.qualities} />
+        },
         professions: { path: "profession.name", name: "Профессия" },
         completedMeetings: { path: "completedMeetings", name: "Кол-во встреч" },
         rate: { path: "rate", name: "Оценка" },
         bookmark: {
             path: "bookmark",
             name: "Избранное",
-            component: user => (
+            component: (user) => (
                 <Bookmark
                     id={user._id}
                     isMarked={user.bookmark}
@@ -28,7 +31,7 @@ const UserTable = ({ users, onDelete, onMark, onSort, selectedSort }) => {
             )
         },
         delete: {
-            component: user => (
+            component: (user) => (
                 <button
                     className={getDeleteButtonClasses()}
                     onClick={() => onDelete(user._id)}
@@ -39,17 +42,6 @@ const UserTable = ({ users, onDelete, onMark, onSort, selectedSort }) => {
         }
     };
 
-    // const renderUsers = () => {
-    //     return users.map((user) => (
-    //         <User
-    //             key={user._id}
-    //             {...user}
-    //             onDelete={onDelete}
-    //             onMark={onMark}
-    //         />
-    //     ));
-    // };
-
     return (
         <table className={getTableClasses()}>
             <TableHeader
@@ -57,10 +49,7 @@ const UserTable = ({ users, onDelete, onMark, onSort, selectedSort }) => {
                 selectedSort={selectedSort}
                 columns={columns}
             />
-            <TableBody
-                {...{ data: users, columns }}
-            />
-            {/* <tbody>{renderUsers()}</tbody> */}
+            <TableBody {...{ data: users, columns }} />
         </table>
     );
 };
