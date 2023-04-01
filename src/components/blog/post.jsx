@@ -1,7 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useHistory } from "react-router-dom";
 
-const Post = ({ posts, id, history }) => {
+const Post = ({ posts, id }) => {
+    const history = useHistory();
     const post = posts.find((post) => post.id === id);
 
     const handleSaveClick = () => {
@@ -19,7 +21,6 @@ const Post = ({ posts, id, history }) => {
 
 Post.propTypes = {
     posts: PropTypes.array.isRequired,
-    history: PropTypes.object.isRequired,
     id: PropTypes.string.isRequired
 };
 

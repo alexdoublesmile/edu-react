@@ -1,10 +1,12 @@
 import React from "react";
-import PropTypes from "prop-types";
 import PostList from "./postList";
 import Post from "./post";
 import query from "query-string";
+import { useLocation, useParams } from "react-router-dom";
 
-const Posts = ({ match, location, history }) => {
+const Posts = () => {
+    const params = useParams();
+    const location = useLocation();
     const posts = [
         {
             id: "1",
@@ -20,24 +22,18 @@ const Posts = ({ match, location, history }) => {
         }
     ];
 
+    const { postId } = params;
     const queryString = query.parse(location.search);
-    const postId = match.params.postId;
     console.log(queryString);
 
     return (
         <>
             {postId
-                ? <Post id={postId} posts={posts} history={history} />
+                ? <Post id={postId} posts={posts} />
                 : <PostList posts={posts} />
             }
         </>
     );
-};
-
-Posts.propTypes = {
-    match: PropTypes.object.isRequired,
-    history: PropTypes.object.isRequired,
-    location: PropTypes.object.isRequired
 };
 
 export default Posts;
