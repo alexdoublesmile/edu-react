@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Link, Switch } from "react-router-dom";
+import { Route, Link } from "react-router-dom";
 import Edit from "./edit";
 import Stats from "./stats";
 
@@ -14,10 +14,8 @@ const Dashboard = () => {
                     <Link to="/dashboard">Dashboard</Link>
                 </li>
             </ul>
-            <Switch>
-                <Route exact path="/dashboard" commponent={Stats} />
-                <Route path="/dashboard/edit" commponent={Edit} />
-            </Switch>
+            <Route exact path="/dashboard" component={Stats} />
+            <Route path="/dashboard/edit" component={Edit} />
         </div>
     );
 };

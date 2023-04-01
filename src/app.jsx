@@ -23,7 +23,7 @@ function App() {
                 <Redirect from="/admin" to="/dashboard" />
                 <Route path="/posts/:postId?" component={Posts} />
                 <Route path="/404" component={NotFound} />
-                <Redirect to={"/404"}/>
+                <Redirect to="/404"/>
             </Switch>
         </>
     );
