@@ -1,15 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const Post = ({ posts, match }) => {
-    const post = posts.find((post) => post.id === match.params.postId);
+const Post = ({ posts, id }) => {
+    const post = posts.find((post) => post.id === id);
 
-    return <>{post ? post.label : "no post with this id"}</>;
+    return <>{post ? post.label : "no post with id " + id}</>;
 };
 
 Post.propTypes = {
     posts: PropTypes.array.isRequired,
-    match: PropTypes.object.isRequired
+    id: PropTypes.string.isRequired
 };
 
 export default Post;
