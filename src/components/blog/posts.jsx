@@ -2,8 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import PostList from "./postList";
 import Post from "./post";
+import query from "query-string";
 
-const Posts = ({ match }) => {
+const Posts = ({ match, location }) => {
     const posts = [
         {
             id: "1",
@@ -19,7 +20,9 @@ const Posts = ({ match }) => {
         }
     ];
 
+    const queryString = query.parse(location.search);
     const postId = match.params.postId;
+    console.log(queryString);
 
     return (
         <>
@@ -32,7 +35,8 @@ const Posts = ({ match }) => {
 };
 
 Posts.propTypes = {
-    match: PropTypes.object.isRequired
+    match: PropTypes.object.isRequired,
+    location: PropTypes.object.isRequired
 };
 
 export default Posts;
