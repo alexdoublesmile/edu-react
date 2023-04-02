@@ -1,7 +1,7 @@
 import React from "react";
 import Users from "../users";
-import Login from "./login";
-import Main from "./main";
+import Login from "../../layouts/login";
+import Main from "../../layouts/main";
 import NotFound from "./notFound";
 import { Route, Switch, Redirect, Link } from "react-router-dom";
 import UserInfo from "./userInfo";
