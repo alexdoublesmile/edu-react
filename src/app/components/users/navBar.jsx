@@ -1,5 +1,5 @@
 import React from "react";
-import Users from "../users";
+import Users from "../../layouts/users";
 import Login from "../../layouts/login";
 import Main from "../../layouts/main";
 import NotFound from "./notFound";

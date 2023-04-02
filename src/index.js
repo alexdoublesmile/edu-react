@@ -5,7 +5,6 @@ import "bootstrap/dist/css/bootstrap.css";
 import App from "./app/App";
 import { BrowserRouter } from "react-router-dom";
 
-// reactDom.render(<App />, document.querySelector("#root"));
 reactDom.render(
     <React.StrictMode>
         <BrowserRouter>
