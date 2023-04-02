@@ -5,13 +5,20 @@ import TableHeader from "./tableHeader";
 import TableBody from "./tableBody";
 import Bookmark from "./bookmark";
 import QualitiesList from "./qualitiesList";
+import { Link } from "react-router-dom";
 
 const UserTable = ({ users, onDelete, onMark, onSort, selectedSort }) => {
     const getDeleteButtonClasses = () => "btn btn-danger";
     const deleteButtonText = "delete";
 
     const columns = {
-        name: { path: "name", name: "Имя" },
+        name: {
+            path: "name",
+            name: "Имя",
+            component: (user) => (
+                <Link to={`/users/${user._id}`}>{user.name}</Link>
+            )
+        },
         qualities: {
             name: "Качества",
             component: (user) => <QualitiesList qualities={user.qualities} />
