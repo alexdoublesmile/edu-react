@@ -7,8 +7,10 @@ import { BrowserRouter } from "react-router-dom";
 
 // reactDom.render(<App />, document.querySelector("#root"));
 reactDom.render(
-    <BrowserRouter>
-        <App />
-    </BrowserRouter>,
+    <React.StrictMode>
+        <BrowserRouter>
+            <App />
+        </BrowserRouter>
+    </React.StrictMode>,
     document.querySelector("#root")
 );
