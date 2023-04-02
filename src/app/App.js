@@ -5,8 +5,6 @@ import NavBar from "./components/users/navBar";
 import Users from "./layouts/users";
 import Login from "./layouts/login";
 import Main from "./layouts/main";
-import NotFound from "./components/users/notFound";
-import UserInfo from "./components/users/userInfo";
 
 const App = () => {
     return (
@@ -15,10 +13,8 @@ const App = () => {
             <Switch>
                 <Route exact path="/" component={Main} />
                 <Route path="/login" component={Login} />
-                <Route exact path="/users" component={Users} />
-                <Route path="/users/:userId?" render={() => <UserInfo />} />
+                <Route path="/users/:userId?" component={Users} />
                 <Redirect to="/" />
-                <Route path="/404" component={NotFound} />
             </Switch>
         </>
     );

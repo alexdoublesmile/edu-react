@@ -3,7 +3,7 @@ import api from "../../api/";
 import SearchStatus from "./searchStatus";
 import Pagination from "./pagination";
 import GroupList from "./groupList";
-import { paginateManually } from "./paginate";
+import { paginateManually } from "../../utils/paginate";
 import UserTable from "./usersTable";
 import _ from "lodash";
 
