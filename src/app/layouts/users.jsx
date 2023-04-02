@@ -4,7 +4,6 @@ import SearchStatus from "../components/users/searchStatus";
 import Pagination from "../components/users/pagination";
 import GroupList from "../components/users/groupList";
 import { paginateManually } from "../utils/paginate";
-import PropTypes from "prop-types";
 import UserTable from "../components/users/usersTable";
 import _ from "lodash";
 
@@ -110,12 +109,6 @@ const Users = () => {
         );
     }
     return "loading...";
-};
-
-Users.propTypes = {
-    users: PropTypes.array.isRequired,
-    onDelete: PropTypes.func.isRequired,
-    onMark: PropTypes.func.isRequired
 };
 
 export default Users;
