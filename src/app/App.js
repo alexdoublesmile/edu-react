@@ -1,5 +1,5 @@
 import React from "react";
-import NavBar from "./components/users/layouts/navBar";
+import NavBar from "../components/users/layouts/navBar";
 // import Posts from "./components/blog/posts";
 // import Dashboard from "./components/blog/dashboard";
 // import Login from "./components/blog/login";
