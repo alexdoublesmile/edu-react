@@ -16,6 +16,10 @@ const TextField = ({ label, type, name, value, onChange }) => {
     );
 };
 
+TextField.defaultProps = {
+    type: "text"
+};
+
 TextField.propTypes = {
     label: PropTypes.string,
     type: PropTypes.string,

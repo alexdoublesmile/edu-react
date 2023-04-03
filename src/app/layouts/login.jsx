@@ -15,7 +15,6 @@ const Login = () => {
         <form action="">
             <TextField
                 label="email"
-                type="text"
                 name="email"
                 value={form.email}
                 onChange={handleChange}
