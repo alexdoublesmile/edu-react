@@ -11,8 +11,13 @@ const Login = () => {
         }));
     };
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log("submitted: ", form);
+    };
+
     return (
-        <form action="">
+        <form onSubmit={handleSubmit}>
             <TextField
                 label="email"
                 name="email"
@@ -26,6 +31,7 @@ const Login = () => {
                 value={form.password}
                 onChange={handleChange}
             />
+            <button type="submit">Submit</button>
         </form>
     );
 };
