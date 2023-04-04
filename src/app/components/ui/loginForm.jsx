@@ -47,33 +47,30 @@ const LoginForm = () => {
     };
 
     return (
-        <>
-            <h3 className="mb-4">Login</h3>
-            <form onSubmit={handleSubmit}>
-                <TextField
-                    label="email"
-                    name="email"
-                    value={data.email}
-                    onChange={handleChange}
-                    error={errors.email}
-                />
-                <TextField
-                    label="password"
-                    type="password"
-                    name="password"
-                    value={data.password}
-                    onChange={handleChange}
-                    error={errors.password}
-                />
-                <button
-                    type="submit"
-                    disabled={Object.keys(errors).length !== 0}
-                    className="btn btn-primary w-100 mx-auto"
-                >
-                    Submit
-                </button>
-            </form>
-        </>
+        <form onSubmit={handleSubmit}>
+            <TextField
+                label="email"
+                name="email"
+                value={data.email}
+                onChange={handleChange}
+                error={errors.email}
+            />
+            <TextField
+                label="password"
+                type="password"
+                name="password"
+                value={data.password}
+                onChange={handleChange}
+                error={errors.password}
+            />
+            <button
+                type="submit"
+                disabled={Object.keys(errors).length !== 0}
+                className="btn btn-primary w-100 mx-auto"
+            >
+                Submit
+            </button>
+        </form>
     );
 };
 
