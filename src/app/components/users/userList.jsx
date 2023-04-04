@@ -15,6 +15,7 @@ const UserList = () => {
     const [selectedProfession, setSelectedProfession] = useState();
     const [currentPage, setCurrentPage] = useState(1);
     const [sortBy, setSortBy] = useState({ path: "name", order: "asc" });
+    const [searchString, setSearchString] = useState("");
 
     const clearFilters = () => setSelectedProfession();
 
@@ -36,6 +37,10 @@ const UserList = () => {
     const handlePageClick = (index) => setCurrentPage(index);
     const handleProfessionSelect = (item) => {
         setSelectedProfession(item);
+        setSearchString("");
+    };
+    const handleSearch = ({ target }) => {
+        setSearchString(target.value);
     };
 
     useEffect(() => {
@@ -49,6 +54,7 @@ const UserList = () => {
             setProfessions(data);
         });
     }, []);
+
     useEffect(() => {
         setCurrentPage(1);
     }, [selectedProfession]);
@@ -56,15 +62,22 @@ const UserList = () => {
     if (users) {
         const filterByProfession = (users) => {
             return selectedProfession
-                ? users.filter(
-                      (user) =>
-                          JSON.stringify(user.profession) ===
-                          JSON.stringify(selectedProfession)
-                  )
+                ? users.filter((user) =>
+                    JSON.stringify(user.profession) ===
+                    JSON.stringify(selectedProfession))
                 : users;
         };
+        const filterBySearchString = (users) => {
+            return users.filter((user) =>
+                user.name.toLowerCase().includes(searchString.toLowerCase())
+            );
+        };
+        const filterUsers = (users) => {
+            const filteredByProfession = filterByProfession(users);
+            return filterBySearchString(filteredByProfession);
+        };
 
-        const filteredUsers = filterByProfession(users);
+        const filteredUsers = filterUsers(users);
         const sortedUsers = _.orderBy(filteredUsers, sortBy.path, sortBy.order);
         const usersPage = paginateManually(sortedUsers, currentPage, pageSize);
         const count = filteredUsers.length;
@@ -88,7 +101,7 @@ const UserList = () => {
                 )}
                 <div className="d-flex flex-column">
                     <SearchStatus usersNumber={count} />
-                    <Search />
+                    <Search value={searchString} onSearch={handleSearch} />
                     {count > 0 && (
                         <UserTable
                             users={usersPage}

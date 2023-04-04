@@ -1,18 +1,27 @@
 import React from "react";
-// import PropTypes from "prop-types";
+import PropTypes from "prop-types";
 
-const Search = () => {
+const Search = ({ value, onSearch }) => {
     return (
-        <div class="input-group mb-3">
+        <div className="input-group mb-3">
             <input
                 type="text"
-                class="form-control"
+                id="search"
+                name="search"
+                value={value}
+                onChange={onSearch}
+                className="form-control"
                 placeholder="Search..."
                 aria-label="Search..."
                 aria-describedby="basic-addon2"
             />
         </div>
     );
+};
+
+Search.propTypes = {
+    value: PropTypes.string,
+    onSearch: PropTypes.func
 };
 
 export default Search;
