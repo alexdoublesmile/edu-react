@@ -7,8 +7,11 @@ function validate(validateMethod, data, config) {
         case "isEmail":
             isNotValid = !(/^\S+@\S+\.\S+$/g.test(data));
             break;
-        case "isCapital":
+        case "hasCapital":
             isNotValid = !(/[A-Z]+/g.test(data));
+            break;
+        case "hasDigit":
+            isNotValid = !(/\d+/g.test(data));
             break;
         default:
             break;

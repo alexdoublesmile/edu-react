@@ -19,7 +19,8 @@ const Login = () => {
         },
         password: {
             isRequired: { message: "password is required" },
-            isCapital: { message: "password should contain capital symbol" }
+            hasCapital: { message: "password should contain capital symbol" },
+            hasDigit: { message: "password should contain digit" }
         }
     };
 
