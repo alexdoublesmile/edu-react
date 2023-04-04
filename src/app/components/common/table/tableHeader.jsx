@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { renderSortArrow } from "../../utils/icons";
+import { renderSortArrow } from "../../../utils/icons";
 
 const TableHeader = ({ onSort, selectedSort, columns }) => {
     const toggleOrder = (order) => (order === "asc" ? "desc" : "asc");
