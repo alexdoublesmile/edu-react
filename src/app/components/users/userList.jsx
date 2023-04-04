@@ -57,7 +57,7 @@ const UserList = () => {
 
     useEffect(() => {
         setCurrentPage(1);
-    }, [selectedProfession]);
+    }, [selectedProfession, searchString]);
 
     if (users) {
         const filterByProfession = (users) => {
