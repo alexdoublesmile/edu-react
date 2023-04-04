@@ -6,8 +6,7 @@ function validate(validateMethod, data, config) {
             }
             break;
         case "isEmail":
-            const emailRegExp = /^\S+@\S+\.\S+$/g;
-            if (!emailRegExp.test(data)) {
+            if (!(/^\S+@\S+\.\S+$/g.test(data))) {
                 return config.message;
             }
             break;
