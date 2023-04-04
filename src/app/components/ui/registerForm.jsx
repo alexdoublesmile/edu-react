@@ -1,10 +1,19 @@
 import React, { useEffect, useState } from "react";
 import TextField from "../common/form/textField";
 import { validator } from "../../utils/validator";
+import api from "../../api";
 
 const RegisterForm = () => {
-    const [data, setData] = useState({ email: "", password: "" });
+    const [data, setData] = useState({ email: "", password: "", profession: "" });
     const [errors, setErrors] = useState({});
+    const [professions, setProfessions] = useState();
+
+    useEffect(() => {
+        api.professions.fetchAll().then((data) => {
+            setProfessions(data);
+        });
+    }, []);
+
     const handleChange = ({ target }) => {
         setData((prevState) => ({
             ...prevState,
@@ -63,6 +72,35 @@ const RegisterForm = () => {
                 onChange={handleChange}
                 error={errors.password}
             />
+            <div className="mb-4">
+                <label htmlFor="validationCustom04" className="form-label">
+                    Profession
+                </label>
+                <select
+                    className="form-select"
+                    id="validationCustom04"
+                    required
+                >
+                    <option selected={data.profession === ""} disabled value="">
+                        Choose...
+                    </option>
+                    {professions && Object.keys(professions).map((professionName) => (
+                        <option
+                            key={professions[professionName]._id}
+                            selected={
+                                professions[professionName]._id ===
+                                data.profession
+                            }
+                            value={professions[professionName]._id}
+                        >
+                            {professions[professionName].name}
+                        </option>
+                    ))}
+                </select>
+                <div className="invalid-feedback">
+                    Please select a valid state.
+                </div>
+            </div>
             <button
                 type="submit"
                 disabled={Object.keys(errors).length !== 0}
