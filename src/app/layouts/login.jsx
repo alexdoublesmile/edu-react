@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import TextField from "../components/users/textField";
+import { validator } from "../utils/validator";
 
 const Login = () => {
     const [data, setData] = useState({ email: "", password: "" });
@@ -10,17 +11,18 @@ const Login = () => {
             [target.name]: target.value
         }));
     };
+
+    const validatorConfig = {
+        email: { isRequired: { message: "email is required" } },
+        password: { isRequired: { message: "password is required" } }
+    };
+
     useEffect(() => {
         validate();
     }, [data]);
 
     const validate = () => {
-        const errors = {};
-        for (const fieldName in data) {
-            if (data[fieldName].trim() === "") {
-                errors[fieldName] = `${fieldName} is required`;
-            }
-        }
+        const errors = validator(data, validatorConfig);
         setErrors(errors);
         return Object.keys(errors).length === 0;
     };
