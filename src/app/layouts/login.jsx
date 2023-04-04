@@ -1,19 +1,36 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TextField from "../components/users/textField";
 
 const Login = () => {
-    const [form, setForm] = useState({ email: "", password: "" });
-
+    const [data, setData] = useState({ email: "", password: "" });
+    const [, setErrors] = useState();
     const handleChange = ({ target }) => {
-        setForm((prevState) => ({
+        setData((prevState) => ({
             ...prevState,
             [target.name]: target.value
         }));
     };
+    useEffect(() => {
+        validate();
+    }, [data]);
+
+    const validate = () => {
+        const errors = {};
+        for (const fieldName in data) {
+            if (data[fieldName].trim() === "") {
+                errors[fieldName] = `${fieldName} is required`;
+            }
+        }
+        setErrors(errors);
+        return Object.keys(errors).length === 0;
+    };
 
     const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log("submitted: ", form);
+        const isValid = validate();
+        if (isValid) {
+            e.preventDefault();
+            console.log("submitted: ", data);
+        }
     };
 
     return (
@@ -21,14 +38,14 @@ const Login = () => {
             <TextField
                 label="email"
                 name="email"
-                value={form.email}
+                value={data.email}
                 onChange={handleChange}
             />
             <TextField
                 label="password"
                 type="password"
                 name="password"
-                value={form.password}
+                value={data.password}
                 onChange={handleChange}
             />
             <button type="submit">Submit</button>
