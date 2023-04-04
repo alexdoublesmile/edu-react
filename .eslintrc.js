@@ -14,6 +14,7 @@ module.exports = {
         indent: ["error", 4, { "SwitchCase": 1 }],
         semi: [2, "always"],
         "space-before-function-paren": ["error", "never"],
+        "multiline-ternary": ["off"],
         quotes: ["error", "double", { allowTemplateLiterals: true }]
     }
 };
