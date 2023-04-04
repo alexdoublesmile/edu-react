@@ -77,20 +77,19 @@ const RegisterForm = () => {
                     Profession
                 </label>
                 <select
-                    className="form-select"
                     id="validationCustom04"
+                    name="profession"
+                    value={data.profession}
+                    onChange={handleChange}
+                    className="form-select"
                     required
                 >
-                    <option selected={data.profession === ""} disabled value="">
+                    <option disabled value="">
                         Choose...
                     </option>
                     {professions && Object.keys(professions).map((professionName) => (
                         <option
                             key={professions[professionName]._id}
-                            selected={
-                                professions[professionName]._id ===
-                                data.profession
-                            }
                             value={professions[professionName]._id}
                         >
                             {professions[professionName].name}
