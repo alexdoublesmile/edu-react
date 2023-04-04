@@ -13,6 +13,9 @@ function validate(validateMethod, data, config) {
         case "hasDigit":
             isNotValid = !(/\d+/g.test(data));
             break;
+        case "hasMinLength":
+            isNotValid = data.length < config.value;
+            break;
         default:
             break;
     }

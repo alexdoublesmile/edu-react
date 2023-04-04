@@ -20,7 +20,11 @@ const Login = () => {
         password: {
             isRequired: { message: "password is required" },
             hasCapital: { message: "password should contain capital symbol" },
-            hasDigit: { message: "password should contain digit" }
+            hasDigit: { message: "password should contain digit" },
+            hasMinLength: {
+                value: "8",
+                message: "password should has 8 symbols min length"
+            }
         }
     };
 
