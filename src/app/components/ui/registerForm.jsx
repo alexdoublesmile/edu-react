@@ -98,7 +98,7 @@ const RegisterForm = () => {
                     ))}
                 </select>
                 <div className="invalid-feedback">
-                    Please select a valid state.
+                    Please select a valid profession
                 </div>
             </div>
             <button
