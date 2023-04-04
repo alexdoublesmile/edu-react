@@ -63,7 +63,7 @@ const Login = () => {
                 onChange={handleChange}
                 error={errors.password}
             />
-            <button type="submit">Submit</button>
+            <button type="submit" disabled={Object.keys(errors).length !== 0}>Submit</button>
         </form>
     );
 };
