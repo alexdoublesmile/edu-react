@@ -26,7 +26,7 @@ export function validator(data, config) {
                 config[fieldName][validateMethod]
             );
 
-            if (error) {
+            if (error && !errors[fieldName]) {
                 errors[fieldName] = error;
             }
         }
