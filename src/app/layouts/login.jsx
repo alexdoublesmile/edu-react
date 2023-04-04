@@ -17,7 +17,10 @@ const Login = () => {
             isRequired: { message: "email is required" },
             isEmail: { message: "email is not correct" }
         },
-        password: { isRequired: { message: "password is required" } }
+        password: {
+            isRequired: { message: "password is required" },
+            isCapital: { message: "password should contain capital symbol" }
+        }
     };
 
     useEffect(() => {

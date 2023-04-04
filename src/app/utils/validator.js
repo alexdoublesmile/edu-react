@@ -1,17 +1,21 @@
 function validate(validateMethod, data, config) {
+    let isNotValid;
     switch (validateMethod) {
         case "isRequired":
-            if (data.trim() === "") {
-                return config.message;
-            }
+            isNotValid = data.trim() === "";
             break;
         case "isEmail":
-            if (!(/^\S+@\S+\.\S+$/g.test(data))) {
-                return config.message;
-            }
+            isNotValid = !(/^\S+@\S+\.\S+$/g.test(data));
+            break;
+        case "isCapital":
+            isNotValid = !(/[A-Z]+/g.test(data));
             break;
         default:
             break;
+    }
+
+    if (isNotValid) {
+        return config.message;
     }
 }
 
