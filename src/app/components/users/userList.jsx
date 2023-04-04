@@ -6,6 +6,7 @@ import GroupList from "./groupList";
 import { paginateManually } from "../../utils/paginate";
 import UserTable from "./usersTable";
 import _ from "lodash";
+import Search from "./search";
 
 const UserList = () => {
     const pageSize = 8;
@@ -56,10 +57,10 @@ const UserList = () => {
         const filterByProfession = (users) => {
             return selectedProfession
                 ? users.filter(
-                    (user) =>
-                        JSON.stringify(user.profession) ===
-                        JSON.stringify(selectedProfession)
-                )
+                      (user) =>
+                          JSON.stringify(user.profession) ===
+                          JSON.stringify(selectedProfession)
+                  )
                 : users;
         };
 
@@ -87,6 +88,7 @@ const UserList = () => {
                 )}
                 <div className="d-flex flex-column">
                     <SearchStatus usersNumber={count} />
+                    <Search />
                     {count > 0 && (
                         <UserTable
                             users={usersPage}
