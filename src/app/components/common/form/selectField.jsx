@@ -18,7 +18,7 @@ const SelectField = ({
             : options;
 
     const getInputClasses = () => {
-        return `form-select ${error ? "is-invalid" : ""}`;
+        return `form-select ${error ? "is-invalid" : "is-valid"}`;
     };
 
     const handleChange = ({ target }) => {
