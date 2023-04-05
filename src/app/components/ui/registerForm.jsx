@@ -85,10 +85,10 @@ const RegisterForm = () => {
                 error={errors.password}
             />
             <SelectField
-                label="Profession"
+                label="Choose your profession"
                 onChange={handleChange}
                 options={professions}
-                defaultOption="Choose profession..."
+                defaultOption="Choose..."
                 error={errors.profession}
                 value={data.profession}
             />
@@ -99,11 +99,13 @@ const RegisterForm = () => {
                     { name: "Other", value: "other" }
                 ]}
                 value={data.sex}
+                label="Choose your sex"
                 name="sex"
                 onChange={handleChange}
             />
             <MultiSelectField
                 options={qualities}
+                label="Choose your qualities"
                 onChange={handleChange}
                 name="qualities"
             />
