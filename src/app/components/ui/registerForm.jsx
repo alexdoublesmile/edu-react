@@ -50,7 +50,7 @@ const RegisterForm = () => {
             isRequired: { message: "profession is required" }
         },
         license: {
-            isRequired: { message: "confirm is required" }
+            isRequired: { message: "Confirmation is required for using service" }
         }
     };
 
@@ -118,6 +118,7 @@ const RegisterForm = () => {
                 value={data.license}
                 name="license"
                 onChange={handleChange}
+                error={errors.license}
             >
                 Confirm <a>license agreement</a>
             </CheckBoxField>
