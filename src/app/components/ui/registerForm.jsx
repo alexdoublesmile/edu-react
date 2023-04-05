@@ -105,7 +105,7 @@ const RegisterForm = () => {
                 name="sex"
                 onChange={handleChange}
             />
-            <MultiSelectField 
+            <MultiSelectField
                 options={qualities}
                 onChange={handleChange}
             />
