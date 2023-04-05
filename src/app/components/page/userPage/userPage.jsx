@@ -14,7 +14,7 @@ const UserPage = ({ id }) => {
         });
     }, []);
 
-    const handleHistory = () => history.push("/users");
+    const handleClick = () => history.push(history.location.pathname + "/edit");
 
     if (user) {
         return (
@@ -25,7 +25,7 @@ const UserPage = ({ id }) => {
                     <QualitiesList qualities={user.qualities} />
                     <h3>Completed meetings: {user.completedMeetings}</h3>
                     <h3>Rate: {user.rate}</h3>
-                    <button onClick={handleHistory}>All users</button>
+                    <button onClick={handleClick}>Edit</button>
                 </>
             )
         );
