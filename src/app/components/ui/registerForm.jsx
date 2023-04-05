@@ -35,6 +35,9 @@ const RegisterForm = () => {
                 value: "8",
                 message: "password should has 8 symbols min length"
             }
+        },
+        profession: {
+            isRequired: { message: "profession is required" }
         }
     };
 
