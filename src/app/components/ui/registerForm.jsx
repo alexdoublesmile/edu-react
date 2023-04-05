@@ -23,13 +23,11 @@ const RegisterForm = () => {
         api.qualities.fetchAll().then(data => setQualities(data));
     }, []);
 
-    const handleChange = ({ target }) => {
-        if (target) {
-            setData((prevState) => ({
-                ...prevState,
-                [target.name]: target.value
-            }));
-        }
+    const handleChange = (target) => {
+        setData((prevState) => ({
+            ...prevState,
+            [target.name]: target.value
+        }));
     };
 
     const validatorConfig = {
@@ -107,6 +105,7 @@ const RegisterForm = () => {
             <MultiSelectField
                 options={qualities}
                 onChange={handleChange}
+                name="qualities"
             />
             <button
                 type="submit"
