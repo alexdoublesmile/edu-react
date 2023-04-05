@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import TextField from "../common/form/textField";
-import { validator } from "../../utils/validator";
 import api from "../../api";
+import { validator } from "../../utils/validator";
+import Select from "react-select/dist/declarations/src/Select";
+import TextField from "../common/form/textField";
 import SelectField from "../common/form/selectField";
 import RadioField from "../common/form/radioField";
 
@@ -98,6 +99,13 @@ const RegisterForm = () => {
                 ]}
                 value={data.sex}
                 name="sex"
+                onChange={handleChange}
+            />
+            <Select 
+                isMulti 
+                options={}
+                className="basic-multi-select"
+                classNamePrefix="select"
                 onChange={handleChange}
             />
             <button
