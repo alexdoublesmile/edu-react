@@ -16,6 +16,7 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 /node_modules
+**/node_modules
 /dist
 /build
 /.pnp
