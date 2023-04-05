@@ -48,6 +48,9 @@ const RegisterForm = () => {
         },
         profession: {
             isRequired: { message: "profession is required" }
+        },
+        license: {
+            isRequired: { message: "confirm is required" }
         }
     };
 
