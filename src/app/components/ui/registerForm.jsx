@@ -5,6 +5,7 @@ import TextField from "../common/form/textField";
 import SelectField from "../common/form/selectField";
 import RadioField from "../common/form/radioField";
 import MultiSelectField from "../common/form/multiSelectField";
+import CheckBoxField from "../common/form/checkBoxField";
 
 const RegisterForm = () => {
     const [data, setData] = useState({
@@ -12,7 +13,8 @@ const RegisterForm = () => {
         password: "",
         profession: "",
         sex: "male",
-        qualities: []
+        qualities: [],
+        license: false
     });
     const [qualities, setQualities] = useState({});
     const [professions, setProfessions] = useState([]);
@@ -109,6 +111,13 @@ const RegisterForm = () => {
                 onChange={handleChange}
                 name="qualities"
             />
+            <CheckBoxField
+                value={data.license}
+                name="license"
+                onChange={handleChange}
+            >
+                Confirm <a>license agreement</a>
+            </CheckBoxField>
             <button
                 type="submit"
                 disabled={Object.keys(errors).length !== 0}
