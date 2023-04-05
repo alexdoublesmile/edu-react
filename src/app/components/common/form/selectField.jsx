@@ -7,7 +7,8 @@ const SelectField = ({
     onChange,
     defaultOption,
     error,
-    options
+    options,
+    name
 }) => {
     const optionsArray =
         !Array.isArray(options) && typeof options === "object"
@@ -27,12 +28,12 @@ const SelectField = ({
 
     return (
         <div className="mb-4">
-            <label htmlFor="validationCustom04" className="form-label">
+            <label htmlFor={name} className="form-label">
                 {label}
             </label>
             <select
-                id="validationCustom04"
-                name="profession"
+                id={name}
+                name={name}
                 value={value}
                 onChange={handleChange}
                 className={getInputClasses()}
@@ -61,6 +62,7 @@ SelectField.propTypes = {
     options: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
     value: PropTypes.string,
     error: PropTypes.string,
+    name: PropTypes.string,
     onChange: PropTypes.func
 };
 
