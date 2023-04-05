@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import api from "../../api";
 import { validator } from "../../utils/validator";
-import Select from "react-select/dist/declarations/src/Select";
 import TextField from "../common/form/textField";
 import SelectField from "../common/form/selectField";
 import RadioField from "../common/form/radioField";
+import MultiSelectField from "../common/form/multiSelectField";
 
 const RegisterForm = () => {
+    const [qualities, setQualities] = useState({});
     const [data, setData] = useState({
         email: "",
         password: "",
@@ -19,6 +20,9 @@ const RegisterForm = () => {
     useEffect(() => {
         api.professions.fetchAll().then((data) => {
             setProfessions(data);
+        });
+        api.qualities.fetchAll().then((data) => {
+            setQualities(data);
         });
     }, []);
 
@@ -101,11 +105,8 @@ const RegisterForm = () => {
                 name="sex"
                 onChange={handleChange}
             />
-            <Select 
-                isMulti 
-                options={}
-                className="basic-multi-select"
-                classNamePrefix="select"
+            <MultiSelectField 
+                options={qualities}
                 onChange={handleChange}
             />
             <button
