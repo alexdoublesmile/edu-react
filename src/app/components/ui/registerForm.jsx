@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import TextField from "../common/form/textField";
 import { validator } from "../../utils/validator";
 import api from "../../api";
+import SelectField from "../common/form/selectField";
 
 const RegisterForm = () => {
     const [data, setData] = useState({ email: "", password: "", profession: "" });
@@ -72,34 +73,14 @@ const RegisterForm = () => {
                 onChange={handleChange}
                 error={errors.password}
             />
-            <div className="mb-4">
-                <label htmlFor="validationCustom04" className="form-label">
-                    Profession
-                </label>
-                <select
-                    id="validationCustom04"
-                    name="profession"
-                    value={data.profession}
-                    onChange={handleChange}
-                    className="form-select"
-                    required
-                >
-                    <option disabled value="">
-                        Choose...
-                    </option>
-                    {professions && Object.keys(professions).map((professionName) => (
-                        <option
-                            key={professions[professionName]._id}
-                            value={professions[professionName]._id}
-                        >
-                            {professions[professionName].name}
-                        </option>
-                    ))}
-                </select>
-                <div className="invalid-feedback">
-                    Please select a valid profession
-                </div>
-            </div>
+            <SelectField
+                label="Profession"
+                onChange={handleChange}
+                options={professions}
+                defaultOption="Choose profession..."
+                error={errors.profession}
+                value={data.profession}
+            />
             <button
                 type="submit"
                 disabled={Object.keys(errors).length !== 0}
