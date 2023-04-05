@@ -7,30 +7,29 @@ import RadioField from "../common/form/radioField";
 import MultiSelectField from "../common/form/multiSelectField";
 
 const RegisterForm = () => {
-    const [qualities, setQualities] = useState({});
     const [data, setData] = useState({
         email: "",
         password: "",
         profession: "",
-        sex: "male"
+        sex: "male",
+        qualities: []
     });
+    const [qualities, setQualities] = useState({});
+    const [professions, setProfessions] = useState([]);
     const [errors, setErrors] = useState({});
-    const [professions, setProfessions] = useState();
 
     useEffect(() => {
-        api.professions.fetchAll().then((data) => {
-            setProfessions(data);
-        });
-        api.qualities.fetchAll().then((data) => {
-            setQualities(data);
-        });
+        api.professions.fetchAll().then(data => setProfessions(data));
+        api.qualities.fetchAll().then(data => setQualities(data));
     }, []);
 
     const handleChange = ({ target }) => {
-        setData((prevState) => ({
-            ...prevState,
-            [target.name]: target.value
-        }));
+        if (target) {
+            setData((prevState) => ({
+                ...prevState,
+                [target.name]: target.value
+            }));
+        }
     };
 
     const validatorConfig = {
