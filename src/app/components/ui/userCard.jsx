@@ -38,7 +38,7 @@ const UserCard = ({ user }) => {
                                 role="button"
                             ></i>
                             <i
-                                className="bi bi-caret-up text-secondary" 
+                                className="bi bi-caret-up text-secondary"
                                 role="button"
                             ></i>
                             <span className="ms-2">{user.rate}</span>
@@ -53,5 +53,5 @@ const UserCard = ({ user }) => {
 UserCard.propTypes = {
     user: PropTypes.object
 };
- 
+
 export default UserCard;
