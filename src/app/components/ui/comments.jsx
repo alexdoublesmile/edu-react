@@ -1,14 +1,40 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 const Comments = () => {
-    return (
-        null
-    );
-}
+    const { userId } = useParams();
+    const [comments, setComments] = useState([]);
 
-Comments.propTypes = {
-    user: PropTypes.object
+    useEffect(() => {
+
+    }, []);
+
+    const handleSubmit = (data) => {
+
+    };
+
+    const handleRemoveComment = (id) => {
+
+    };
+
+    const sortedComments = orderBy(comments, ["created_at"], ["desc"]);
+
+    return (
+        <>
+            <div className="card mb-2">
+                {" "}
+                <div className="card-body">
+                    <AddCommentForm onSubmit={handleSubmit} />
+                </div>
+                {sortedComments.length > 0 && (
+                    <div className="card mb-3">
+
+                    </div>
+                )}
+            </div>
+        </>
+    );
 };
+
  
 export default Comments;
