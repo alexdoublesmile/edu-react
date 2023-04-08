@@ -14,14 +14,16 @@ const Comments = () => {
 
     const handleSubmit = (data) => {
         api.comments
-            .add()
-            .then();
+            .add({ ...data, pageId: userId })
+            .then((data) => setComments([...comments, data]));
     };
 
     const handleRemoveComment = (id) => {
         api.comments
             .remove(id)
-            .then();
+            .then(id => {
+                setComments(comments.filter(comment => comment.id !== id));
+            });
     };
 
     const sortedComments = orderBy(comments, ["created_at"], ["desc"]);
