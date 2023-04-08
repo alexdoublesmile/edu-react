@@ -22,7 +22,7 @@ const UserPage = ({ userId }) => {
                         <QualitiesCard data={user.qualities} />
                         <MeetingsCard value={user.completedMeetings} />
                     </div>
-                    <div className="col-mb-8">
+                    <div className="col-md-8">
                         <Comments />
                     </div>
                 </div>
