@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import api from "../../../api";
-import Qualities from "../../ui/qualities";
-import { useHistory } from "react-router-dom";
 import UserCard from "../../ui/userCard";
 import QualitiesCard from "../../ui/qualitiesCard";
 import MeetingsCard from "../../ui/meetingsCard";
@@ -28,12 +26,6 @@ const UserPage = ({ userId }) => {
                         <Comments />
                     </div>
                 </div>
-                {/* <h1> {user.name}</h1>
-                <h2>Профессия: {user.profession.name}</h2>
-                <Qualities qualities={user.qualities} />
-                <p>completedMeetings: {user.completedMeetings}</p>
-                <h2>Rate: {user.rate}</h2>
-                <button onClick={handleClick}>Изменить</button> */}
             </div>
         );
     } else {
