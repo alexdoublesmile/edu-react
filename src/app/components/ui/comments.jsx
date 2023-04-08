@@ -1,20 +1,27 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import api from "../../api";
 
 const Comments = () => {
     const { userId } = useParams();
     const [comments, setComments] = useState([]);
 
     useEffect(() => {
-
+        api.comments
+            .fetchCommentsForUser(userId)
+            .then((data) => setComments(data));
     }, []);
 
     const handleSubmit = (data) => {
-
+        api.comments
+            .add()
+            .then();
     };
 
     const handleRemoveComment = (id) => {
-
+        api.comments
+            .remove(id)
+            .then();
     };
 
     const sortedComments = orderBy(comments, ["created_at"], ["desc"]);
