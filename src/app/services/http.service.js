@@ -6,7 +6,7 @@ axios.defaults.baseURL = config.apiEndpoint;
 
 axios.interceptors.response.use(
     (res) => res,
-    function (error) {
+    function(error) {
         const expectedErrors =
             error.response &&
             error.response.status >= 400 &&
@@ -24,6 +24,6 @@ const httpService = {
     get: axios.get,
     post: axios.post,
     put: axios.put,
-    delete: axios.delete,
+    delete: axios.delete
 };
 export default httpService;
