@@ -1,5 +1,4 @@
 import axios from "axios";
-import logger from "./log.service";
 import { toast } from "react-toastify";
 import config from "../config.json";
 
@@ -14,7 +13,7 @@ axios.interceptors.response.use(
             error.response.status < 500;
 
         if (!expectedErrors) {
-            logger.log(error);
+            console.log(error);
             toast.error("Somthing was wrong. Try it later");
         } else {
             return Promise.reject(error);
