@@ -4,7 +4,8 @@
     "private": true,
     "scripts": {
         "start": "node ./bin/www",
-        "dev": "set DEBUG=server:* & nodemon ./bin/www"
+        "dev": " DEBUG=server:* nodemon ./bin/www",
+        "windev": "set DEBUG=server:* & nodemon ./bin/www"
     },
     "dependencies": {
         "bcryptjs": "^2.4.3",
