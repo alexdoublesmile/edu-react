@@ -16,8 +16,9 @@ axios.interceptors.response.use(
         if (!expectedErrors) {
             logger.log(error);
             toast.error("Somthing was wrong. Try it later");
+        } else {
+            return Promise.reject(error);
         }
-        return Promise.reject(error);
     }
 );
 const httpService = {
