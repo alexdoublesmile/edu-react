@@ -1,20 +1,25 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { renderSortArrow } from "../../../utils/icons";
-
 const TableHeader = ({ onSort, selectedSort, columns }) => {
-    const toggleOrder = (order) => (order === "asc" ? "desc" : "asc");
-
-    const handleSortBy = (sortBy) => {
-        let sortOrder = "asc";
-        if (selectedSort.path === sortBy) {
-            sortOrder = toggleOrder(selectedSort.order);
+    const handleSort = (item) => {
+        if (selectedSort.path === item) {
+            onSort({
+                ...selectedSort,
+                order: selectedSort.order === "asc" ? "desc" : "asc"
+            });
+        } else {
+            onSort({ path: item, order: "asc" });
         }
-        onSort({ path: sortBy, order: sortOrder });
     };
-
-    const getOnClickAction = (column) => {
-        return column.path ? () => handleSortBy(column.path) : undefined;
+    const rendeSortArrow = (selectedSort, currentPath) => {
+        if (selectedSort.path === currentPath) {
+            if (selectedSort.order === "asc") {
+                return <i className="bi bi-caret-down-fill"></i>;
+            } else {
+                return <i className="bi bi-caret-up-fill"></i>;
+            }
+        }
+        return null;
     };
 
     return (
@@ -23,21 +28,22 @@ const TableHeader = ({ onSort, selectedSort, columns }) => {
                 {Object.keys(columns).map((column) => (
                     <th
                         key={column}
-                        scope="col"
-                        onClick={getOnClickAction(columns[column])}
+                        onClick={
+                            columns[column].path
+                                ? () => handleSort(columns[column].path)
+                                : undefined
+                        }
                         {...{ role: columns[column].path && "button" }}
+                        scope="col"
                     >
                         {columns[column].name}{" "}
-                        {columns[column].path === selectedSort.path
-                            ? renderSortArrow(selectedSort.order)
-                            : null}
+                        {rendeSortArrow(selectedSort, columns[column].path)}
                     </th>
                 ))}
             </tr>
         </thead>
     );
 };
-
 TableHeader.propTypes = {
     onSort: PropTypes.func.isRequired,
     selectedSort: PropTypes.object.isRequired,

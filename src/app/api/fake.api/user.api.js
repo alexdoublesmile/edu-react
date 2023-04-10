@@ -34,17 +34,6 @@ const qualities = {
 
 const users = [
     {
-        _id: "67rdca3eeb7f6fgeed471816",
-        name: "Кокс",
-        email: "white4571@twipet.com",
-        sex: "male",
-        profession: professions.doctor,
-        qualities: [qualities.buller, qualities.handsome, qualities.alcoholic],
-        completedMeetings: 15,
-        rate: 2.5,
-        bookmark: false
-    },
-    {
         _id: "67rdca3eeb7f6fgeed471815",
         name: "Джон Дориан",
         email: "Jony7351@tw.com",
@@ -52,6 +41,17 @@ const users = [
         profession: professions.doctor,
         qualities: [qualities.tedious, qualities.uncertain, qualities.strange],
         completedMeetings: 36,
+        rate: 2.5,
+        bookmark: false
+    },
+    {
+        _id: "67rdca3eeb7f6fgeed471816",
+        name: "Кокс",
+        email: "white4571@twipet.com",
+        sex: "male",
+        profession: professions.doctor,
+        qualities: [qualities.buller, qualities.handsome, qualities.alcoholic],
+        completedMeetings: 15,
         rate: 2.5,
         bookmark: false
     },
@@ -172,7 +172,7 @@ if (!localStorage.getItem("users")) {
 
 const fetchAll = () =>
     new Promise((resolve) => {
-        window.setTimeout(function() {
+        window.setTimeout(function () {
             resolve(JSON.parse(localStorage.getItem("users")));
         }, 2000);
     });
@@ -187,7 +187,7 @@ const update = (id, data) =>
 
 const getById = (id) =>
     new Promise((resolve) => {
-        window.setTimeout(function() {
+        window.setTimeout(function () {
             resolve(
                 JSON.parse(localStorage.getItem("users")).find(
                     (user) => user._id === id

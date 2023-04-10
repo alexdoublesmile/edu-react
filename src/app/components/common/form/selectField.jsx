@@ -8,8 +8,7 @@ const SelectField = ({
     defaultOption,
     options,
     error,
-    name,
-    ...rest
+    name
 }) => {
     const handleChange = ({ target }) => {
         onChange({ name: target.name, value: target.value });
@@ -34,7 +33,6 @@ const SelectField = ({
                 name={name}
                 value={value}
                 onChange={handleChange}
-                {...rest}
             >
                 <option disabled value="">
                     {defaultOption}
@@ -61,4 +59,4 @@ SelectField.propTypes = {
     name: PropTypes.string
 };
 
-export default React.memo(SelectField);
+export default SelectField;

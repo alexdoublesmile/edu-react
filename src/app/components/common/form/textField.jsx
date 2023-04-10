@@ -1,20 +1,18 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { renderEye } from "../../../utils/icons";
 
-const TextField = ({ label, type, name, value, onChange, error, ...rest }) => {
+const TextField = ({ label, type, name, value, onChange, error }) => {
     const [showPassword, setShowPassword] = useState(false);
 
     const handleChange = ({ target }) => {
         onChange({ name: target.name, value: target.value });
     };
-
     const getInputClasses = () => {
-        return `form-control ${error ? "is-invalid" : "is-valid"}`;
+        return "form-control" + (error ? " is-invalid" : "");
     };
-
-    const toggleShowPassword = () => setShowPassword((prevState) => !prevState);
-
+    const toggleShowPassword = () => {
+        setShowPassword((prevState) => !prevState);
+    };
     return (
         <div className="mb-4">
             <label htmlFor={name}>{label}</label>
@@ -26,7 +24,6 @@ const TextField = ({ label, type, name, value, onChange, error, ...rest }) => {
                     value={value}
                     onChange={handleChange}
                     className={getInputClasses()}
-                    {...rest}
                 />
                 {type === "password" && (
                     <button
@@ -34,7 +31,11 @@ const TextField = ({ label, type, name, value, onChange, error, ...rest }) => {
                         type="button"
                         onClick={toggleShowPassword}
                     >
-                        {renderEye(showPassword)}
+                        <i
+                            className={
+                                "bi bi-eye" + (showPassword ? "-slash" : "")
+                            }
+                        ></i>
                     </button>
                 )}
                 {error && <div className="invalid-feedback">{error}</div>}
@@ -42,18 +43,16 @@ const TextField = ({ label, type, name, value, onChange, error, ...rest }) => {
         </div>
     );
 };
-
 TextField.defaultProps = {
     type: "text"
 };
-
 TextField.propTypes = {
     label: PropTypes.string,
     type: PropTypes.string,
     name: PropTypes.string,
     value: PropTypes.string,
-    error: PropTypes.string,
-    onChange: PropTypes.func
+    onChange: PropTypes.func,
+    error: PropTypes.string
 };
 
-export default React.memo(TextField);
+export default TextField;

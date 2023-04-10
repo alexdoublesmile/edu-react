@@ -21,21 +21,19 @@ const comments = [
         created_at: "1633573058520"
     }
 ];
-
 if (!localStorage.getItem("comments")) {
     localStorage.setItem("comments", JSON.stringify(comments));
 }
-
 const fetchAll = () =>
     new Promise((resolve) => {
-        window.setTimeout(function() {
+        window.setTimeout(function () {
             resolve(comments);
         }, 200);
     });
 
 const fetchCommentsForUser = (userId) =>
     new Promise((resolve) => {
-        window.setTimeout(function() {
+        window.setTimeout(function () {
             resolve(
                 JSON.parse(localStorage.getItem("comments")).filter(
                     (c) => c.pageId === userId
@@ -43,10 +41,9 @@ const fetchCommentsForUser = (userId) =>
             );
         }, 200);
     });
-
 const add = (data) =>
     new Promise((resolve) => {
-        window.setTimeout(function() {
+        window.setTimeout(function () {
             const comments = JSON.parse(localStorage.getItem("comments"));
             const newComment = {
                 ...data,
@@ -61,7 +58,7 @@ const add = (data) =>
 
 const remove = (id) =>
     new Promise((resolve) => {
-        window.setTimeout(function() {
+        window.setTimeout(function () {
             const comments = JSON.parse(localStorage.getItem("comments"));
             const newComments = comments.filter((x) => x._id !== id);
             console.log(id);
@@ -70,7 +67,6 @@ const remove = (id) =>
             resolve(id);
         }, 200);
     });
-
 export default {
     fetchAll,
     fetchCommentsForUser,

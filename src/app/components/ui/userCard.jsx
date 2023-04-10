@@ -1,14 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useHistory } from "react-router-dom";
-import { renderGear, renderSortArrow } from "../../utils/icons";
-
 const UserCard = ({ user }) => {
     const history = useHistory();
     const handleClick = () => {
         history.push(history.location.pathname + "/edit");
     };
-
     return (
         <div className="card mb-3">
             <div className="card-body">
@@ -16,7 +13,7 @@ const UserCard = ({ user }) => {
                     className="position-absolute top-0 end-0 btn btn-light btn-sm"
                     onClick={handleClick}
                 >
-                    {renderGear()}
+                    <i className="bi bi-gear"></i>
                 </button>
                 <div className="d-flex flex-column align-items-center text-center position-relative">
                     <img
@@ -34,8 +31,14 @@ const UserCard = ({ user }) => {
                             {user.profession.name}
                         </p>
                         <div className="text-muted">
-                            {renderSortArrow()}
-                            {renderSortArrow("desc")}
+                            <i
+                                className="bi bi-caret-down-fill text-primary"
+                                role="button"
+                            ></i>
+                            <i
+                                className="bi bi-caret-up text-secondary"
+                                role="button"
+                            ></i>
                             <span className="ms-2">{user.rate}</span>
                         </div>
                     </div>
@@ -44,7 +47,6 @@ const UserCard = ({ user }) => {
         </div>
     );
 };
-
 UserCard.propTypes = {
     user: PropTypes.object
 };

@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import { paginateManually } from "../../../utils/paginate";
+import { paginate } from "../../../utils/paginate";
 import Pagination from "../../common/pagination";
 import api from "../../../api";
 import GroupList from "../../common/groupList";
-import SearchStatus from "../../ui/search/searchStatus";
+import SearchStatus from "../../ui/searchStatus";
 import UserTable from "../../ui/usersTable";
 import _ from "lodash";
 import { useUser } from "../../../hooks/useUsers";
-const UserListPage = () => {
+const UsersListPage = () => {
     const { users } = useUser();
     const [currentPage, setCurrentPage] = useState(1);
     const [professions, setProfession] = useState();
@@ -59,22 +59,18 @@ const UserListPage = () => {
     if (users) {
         const filteredUsers = searchQuery
             ? users.filter(
-                (user) =>
-                    user.name
-                        .toLowerCase()
-                        .indexOf(searchQuery.toLowerCase()) !== -1
-            )
+                  (user) =>
+                      user.name
+                          .toLowerCase()
+                          .indexOf(searchQuery.toLowerCase()) !== -1
+              )
             : selectedProf
-                ? users.filter(
-                    (user) => {
-                        console.log(user);
-                        console.log(user.profession);
-                        console.log(selectedProf);
-                        return JSON.stringify(user.profession) ===
-                        JSON.stringify(selectedProf._id);
-                    }
-                )
-                : users;
+            ? users.filter(
+                  (user) =>
+                      JSON.stringify(user.profession) ===
+                      JSON.stringify(selectedProf)
+              )
+            : users;
 
         const count = filteredUsers.length;
         const sortedUsers = _.orderBy(
@@ -82,7 +78,7 @@ const UserListPage = () => {
             [sortBy.path],
             [sortBy.order]
         );
-        const usersCrop = paginateManually(sortedUsers, currentPage, pageSize);
+        const usersCrop = paginate(sortedUsers, currentPage, pageSize);
         const clearFilter = () => {
             setSelectedProf();
         };
@@ -106,7 +102,7 @@ const UserListPage = () => {
                     </div>
                 )}
                 <div className="d-flex flex-column">
-                    <SearchStatus usersNumber={count} />
+                    <SearchStatus length={count} />
                     <input
                         type="text"
                         name="searchQuery"
@@ -137,8 +133,8 @@ const UserListPage = () => {
     }
     return "loading...";
 };
-UserListPage.propTypes = {
+UsersListPage.propTypes = {
     users: PropTypes.array
 };
 
-export default UserListPage;
+export default UsersListPage;
