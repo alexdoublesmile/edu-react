@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const SearchStatus = (props) => {
+const SearchStatus = ({ usersNumber }) => {
     const getUsersNumberText = (num) => {
         if (num > 0) {
             return num > 1 ? `${num} persons are` : "1 person is";
@@ -12,7 +12,7 @@ const SearchStatus = (props) => {
 
     const statusClasses = "btn btn-primary btn-lg";
     const statusMsg = `${getUsersNumberText(
-        props.usersNumber
+        usersNumber
     )} waiting for you!`;
 
     return <p className={statusClasses}>{statusMsg}</p>;

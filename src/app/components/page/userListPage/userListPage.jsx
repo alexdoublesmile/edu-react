@@ -66,9 +66,13 @@ const UserListPage = () => {
             )
             : selectedProf
                 ? users.filter(
-                    (user) =>
-                        JSON.stringify(user.profession) ===
-                        JSON.stringify(selectedProf)
+                    (user) => {
+                        console.log(user);
+                        console.log(user.profession);
+                        console.log(selectedProf);
+                        return JSON.stringify(user.profession) ===
+                        JSON.stringify(selectedProf._id);
+                    }
                 )
                 : users;
 
@@ -102,7 +106,7 @@ const UserListPage = () => {
                     </div>
                 )}
                 <div className="d-flex flex-column">
-                    <SearchStatus length={count} />
+                    <SearchStatus usersNumber={count} />
                     <input
                         type="text"
                         name="searchQuery"
