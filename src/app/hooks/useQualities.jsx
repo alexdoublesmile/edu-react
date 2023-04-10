@@ -15,7 +15,7 @@ export const QualitiesProvider = ({ children }) => {
     const [isLoading, setLoading] = useState(true);
 
     useEffect(() => {
-        const getQualities = async () => {
+        const getQualities = async() => {
             try {
                 const { content } = await qualityService.fetchAll();
                 setQualities(content);

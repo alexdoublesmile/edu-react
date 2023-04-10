@@ -5,7 +5,7 @@ import configFile from "../config.json";
 axios.defaults.baseURL = configFile.apiEndpoint;
 
 axios.interceptors.request.use(
-    function (config) {
+    function(config) {
         if (configFile.isFireBase) {
             const containSlash = /\/$/gi.test(config.url);
             config.url =
@@ -13,15 +13,15 @@ axios.interceptors.request.use(
         }
         return config;
     },
-    function (error) {
+    function(error) {
         return Promise.reject(error);
     }
 );
 function transformData(data) {
     return data
         ? Object.keys(data).map((key) => ({
-              ...data[key]
-          }))
+            ...data[key]
+        }))
         : [];
 }
 axios.interceptors.response.use(
@@ -31,7 +31,7 @@ axios.interceptors.response.use(
         }
         return res;
     },
-    function (error) {
+    function(error) {
         const expectedErrors =
             error.response &&
             error.response.status >= 400 &&
