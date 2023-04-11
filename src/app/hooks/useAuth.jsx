@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import PropTypes from "prop-types";
+import axios from "axios";
 // import userService from "../services/user.service";
 // import { toast } from "react-toastify";
 
@@ -10,34 +11,19 @@ export const useAuth = () => {
 };
 
 const AuthProvider = ({ children }) => {
-    // const [users, setUsers] = useState([]);
-    // const [isLoading, setLoading] = useState(true);
-    // const [error, setError] = useState(null);
-    // useEffect(() => {
-    //     getUsers();
-    // }, []);
-    // useEffect(() => {
-    //     if (error !== null) {
-    //         toast(error);
-    //         setError(null);
-    //     }
-    // }, [error]);
-    // async function getUsers() {
-    //     try {
-    //         const { content } = await userService.get();
-    //         setUsers(content);
-    //         setLoading(false);
-    //     } catch (error) {
-    //         errorCatcher(error);
-    //     }
-    // }
-    // function errorCatcher(error) {
-    //     const { message } = error.response.data;
-    //     setError(message);
-    //     setLoading(false);
-    // }
+    async function signUp({ email, password }) {
+        const key = "AIzaSyCDxYiBYc2eWs4vkpSAKdaWHs3rVh_VGs0";
+        const url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=${key}`;
+        const { data } = axios.post(url, {
+            email,
+            password,
+            returnSecureToken: true
+        });
+        console.log(data);
+    };
+
     return (
-        <AuthContext.Provider>
+        <AuthContext.Provider value={signUp}>
             { children }
         </AuthContext.Provider>
     );
