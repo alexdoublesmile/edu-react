@@ -7,6 +7,7 @@ import MultiSelectField from "../common/form/multiSelectField";
 import CheckBoxField from "../common/form/checkBoxField";
 import { useQualities } from "../../hooks/useQualities";
 import { useProfessions } from "../../hooks/useProfession";
+import { useAuth } from "../../hooks/useAuth";
 
 const RegisterForm = () => {
     const [data, setData] = useState({
@@ -30,6 +31,7 @@ const RegisterForm = () => {
         value: profession._id
     }));
 
+    const { signUp } = useAuth();
     const [errors, setErrors] = useState({});
 
     // const getProfessionById = (id) => {
@@ -116,11 +118,14 @@ const RegisterForm = () => {
         e.preventDefault();
         const isValid = validate();
         if (!isValid) return;
-        // const { profession, qualities } = data;
-        console.log({
+
+        const newData = {
             ...data,
             qualities: data.qualities.map(q => q.value)
-        });
+        };
+
+        console.log(newData);
+        signUp(newData);
     };
 
     return (
