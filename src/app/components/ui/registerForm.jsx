@@ -17,47 +17,44 @@ const RegisterForm = () => {
         qualities: [],
         licence: false
     });
+
     const { qualities } = useQualities();
-    const { professions } = useProfessions();
-
-    const [errors, setErrors] = useState({});
-
     const qualitiesList = qualities.map(q => ({
         label: q.name,
         value: q._id
     }));
 
+    const { professions } = useProfessions();
     const professionList = professions.map(profession => ({
         label: profession.name,
         value: profession._id
     }));
 
-    const getProfessionById = (id) => {
-        for (const prof of professions) {
-            if (prof._id === id) {
-                return { _id: prof._id, name: prof.name };
-            }
-        }
-    };
+    const [errors, setErrors] = useState({});
 
-    const getQualities = (elements) => {
-        const qualitiesArray = [];
-        // console.log("Elements: ", elements);
-        // console.log("Qualities: ", qualities);
-        // console.log("QualitiesList: ", qualitiesList);
-        for (const elem of elements) {
-            for (const quality in qualities) {
-                if (elem.value === qualities[quality]._id) {
-                    qualitiesArray.push({
-                        _id: qualities[quality]._id,
-                        name: qualities[quality].name,
-                        color: qualities[quality].color
-                    });
-                }
-            }
-        }
-        return qualitiesArray;
-    };
+    // const getProfessionById = (id) => {
+    //     for (const prof of professions) {
+    //         if (prof._id === id) {
+    //             return { _id: prof._id, name: prof.name };
+    //         }
+    //     }
+    // };
+
+    // const getQualities = (elements) => {
+    //     const qualitiesArray = [];
+    //     for (const elem of elements) {
+    //         for (const quality in qualities) {
+    //             if (elem.value === qualities[quality]._id) {
+    //                 qualitiesArray.push({
+    //                     _id: qualities[quality]._id,
+    //                     name: qualities[quality].name,
+    //                     color: qualities[quality].color
+    //                 });
+    //             }
+    //         }
+    //     }
+    //     return qualitiesArray;
+    // };
 
     const handleChange = (target) => {
         setData((prevState) => ({
@@ -119,11 +116,10 @@ const RegisterForm = () => {
         e.preventDefault();
         const isValid = validate();
         if (!isValid) return;
-        const { profession, qualities } = data;
+        // const { profession, qualities } = data;
         console.log({
             ...data,
-            profession: getProfessionById(profession),
-            qualities: getQualities(qualities)
+            qualities: data.qualities.map(q => q.value)
         });
     };
 
