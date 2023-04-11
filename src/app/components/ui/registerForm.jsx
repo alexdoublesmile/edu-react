@@ -34,20 +34,23 @@ const RegisterForm = () => {
 
     const getProfessionById = (id) => {
         for (const prof of professions) {
-            if (prof.value === id) {
-                return { _id: prof.value, name: prof.label };
+            if (prof._id === id) {
+                return { _id: prof._id, name: prof.name };
             }
         }
     };
 
     const getQualities = (elements) => {
         const qualitiesArray = [];
+        // console.log("Elements: ", elements);
+        // console.log("Qualities: ", qualities);
+        // console.log("QualitiesList: ", qualitiesList);
         for (const elem of elements) {
             for (const quality in qualities) {
-                if (elem.value === qualities[quality].value) {
+                if (elem.value === qualities[quality]._id) {
                     qualitiesArray.push({
-                        _id: qualities[quality].value,
-                        name: qualities[quality].label,
+                        _id: qualities[quality]._id,
+                        name: qualities[quality].name,
                         color: qualities[quality].color
                     });
                 }
