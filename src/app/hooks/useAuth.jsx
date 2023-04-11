@@ -8,11 +8,15 @@ export const useAuth = () => {
     return useContext(AuthContext);
 };
 
+// const TOKEN_KEY = "jwt-token";
+// const REFRESH_KEY = "jwt-refresh-token";
+// const EXPIRES_KEY = "jwt-expires";
+
 const AuthProvider = ({ children }) => {
     async function signUp({ email, password }) {
         const key = "AIzaSyCDxYiBYc2eWs4vkpSAKdaWHs3rVh_VGs0";
-        const url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=${key}`;
-        const { data } = axios.post(url, {
+        const url = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${key}`;
+        const { data } = await axios.post(url, {
             email,
             password,
             returnSecureToken: true
