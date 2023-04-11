@@ -12,7 +12,7 @@ const LoginForm = () => {
         stayOn: false
     });
     const [errors, setErrors] = useState({});
-    const [enterError, setEnterError] = useState("");
+    const [enterError, setEnterError] = useState(null);
     const { signIn } = useAuth();
     const history = useHistory();
 
@@ -21,6 +21,7 @@ const LoginForm = () => {
             ...prevState,
             [target.name]: target.value
         }));
+        setEnterError(null);
     };
     const validatorConfig = {
         email: {
