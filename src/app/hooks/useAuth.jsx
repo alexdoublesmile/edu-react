@@ -35,8 +35,9 @@ const AuthProvider = ({ children }) => {
             errorCatcher(error);
             const { code, message } = error.response.data.error;
             if (code === 400) {
-                const errorObject = { message: message };
-                throw errorObject;
+                // const errorObject = { message: message };
+                // throw errorObject;
+                throw new Error(message);
             }
         }
     }

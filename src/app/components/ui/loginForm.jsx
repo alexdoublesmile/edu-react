@@ -52,7 +52,7 @@ const LoginForm = () => {
             await signIn(data);
             history.push("/");
         } catch (error) {
-            console.log(error);
+            console.log(error.message);
         }
     };
     return (
