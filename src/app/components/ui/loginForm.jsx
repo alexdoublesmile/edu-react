@@ -62,7 +62,7 @@ const LoginForm = () => {
         if (!isValid) return;
         console.log(data);
         try {
-            signIn(data);
+            await signIn(data);
             history.push("/");
         } catch (error) {
             console.log(error);
