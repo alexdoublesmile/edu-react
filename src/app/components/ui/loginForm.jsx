@@ -3,6 +3,7 @@ import { validator } from "../../utils/validator";
 import TextField from "../common/form/textField";
 import CheckBoxField from "../common/form/checkBoxField";
 import { useAuth } from "../../hooks/useAuth";
+import { useHistory } from "react-router-dom";
 
 const LoginForm = () => {
     const [data, setData] = useState({
@@ -12,6 +13,7 @@ const LoginForm = () => {
     });
     const [errors, setErrors] = useState({});
     const { signIn } = useAuth();
+    const history = useHistory();
 
     const handleChange = (target) => {
         setData((prevState) => ({
@@ -61,6 +63,7 @@ const LoginForm = () => {
         console.log(data);
         try {
             signIn(data);
+            history.push("/");
         } catch (error) {
             console.log(error);
         }
