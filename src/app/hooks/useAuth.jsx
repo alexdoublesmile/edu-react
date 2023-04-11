@@ -26,8 +26,8 @@ const AuthProvider = ({ children }) => {
         localStorage.setItem(EXPIRES_KEY, expires);
     }
     async function signUp({ email, password, ...rest }) {
-        const key = "AIzaSyCDxYiBYc2eWs4vkpSAKdaWHs3rVh_VGs0";
-        const url = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${key}`;
+        const key = "";
+        const url = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${process.env.REACT_APP_FIREBASE_KEY}`;
         try {
             const { data } = await httpAuth.post(url, {
                 email,
