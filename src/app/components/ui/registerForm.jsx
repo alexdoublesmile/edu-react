@@ -8,6 +8,7 @@ import CheckBoxField from "../common/form/checkBoxField";
 import { useQualities } from "../../hooks/useQualities";
 import { useProfessions } from "../../hooks/useProfession";
 import { useAuth } from "../../hooks/useAuth";
+import { useHistory } from "react-router-dom";
 
 const RegisterForm = () => {
     const [data, setData] = useState({
@@ -33,6 +34,7 @@ const RegisterForm = () => {
 
     const { signUp } = useAuth();
     const [errors, setErrors] = useState({});
+    const history = useHistory();
 
     // const getProfessionById = (id) => {
     //     for (const prof of professions) {
@@ -128,6 +130,7 @@ const RegisterForm = () => {
 
         try {
             await signUp(newData);
+            history.push("/");
         } catch (error) {
             setErrors(error);
         }
