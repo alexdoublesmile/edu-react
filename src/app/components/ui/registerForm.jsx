@@ -114,7 +114,7 @@ const RegisterForm = () => {
 
     const isValid = Object.keys(errors).length === 0;
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
         e.preventDefault();
         const isValid = validate();
         if (!isValid) return;
@@ -125,7 +125,12 @@ const RegisterForm = () => {
         };
 
         console.log("Submit data: ", newData);
-        signUp(newData);
+
+        try {
+            await signUp(newData);
+        } catch (error) {
+            setErrors(error);
+        }
     };
 
     return (

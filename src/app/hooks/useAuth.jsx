@@ -30,6 +30,13 @@ const AuthProvider = ({ children }) => {
             console.log("Auth data: ", data);
         } catch (error) {
             errorCatcher(error);
+            const { code, message } = error.response.data.error;
+            if (code === 400) {
+                // if (message === "EMAIL_EXISTS") {
+                const errorObject = { email: message };
+                throw errorObject;
+                // }
+            }
         }
     }
 
