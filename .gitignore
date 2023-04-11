@@ -3,6 +3,7 @@ HELP.md
 .DS_Store
 .env.local
 .env.development.local
+.env.development
 .env.test.local
 .env.production.local
 
