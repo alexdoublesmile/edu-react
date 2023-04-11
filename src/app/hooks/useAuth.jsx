@@ -34,7 +34,7 @@ const AuthProvider = ({ children }) => {
             errorCatcher(error);
             const { code, message } = error.response.data.error;
             if (code === 400) {
-                const errorObject = { email: message };
+                const errorObject = { message: message };
                 throw errorObject;
             }
         }
@@ -42,7 +42,7 @@ const AuthProvider = ({ children }) => {
 
     async function signUp({ email, password, ...rest }) {
         try {
-            const { data } = await httpAuth.post(accounts:signUp, {
+            const { data } = await httpAuth.post("accounts:signUp", {
                 email,
                 password,
                 returnSecureToken: true
@@ -55,7 +55,7 @@ const AuthProvider = ({ children }) => {
             const { code, message } = error.response.data.error;
             if (code === 400) {
                 // if (message === "EMAIL_EXISTS") {
-                const errorObject = { email: message };
+                const errorObject = { message: message };
                 throw errorObject;
                 // }
             }

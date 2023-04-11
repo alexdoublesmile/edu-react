@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { validator } from "../../utils/validator";
 import TextField from "../common/form/textField";
 import CheckBoxField from "../common/form/checkBoxField";
+import { useAuth } from "../../hooks/useAuth";
 
 const LoginForm = () => {
     const [data, setData] = useState({
@@ -10,6 +11,8 @@ const LoginForm = () => {
         stayOn: false
     });
     const [errors, setErrors] = useState({});
+    const { signIn } = useAuth();
+
     const handleChange = (target) => {
         setData((prevState) => ({
             ...prevState,
@@ -51,11 +54,16 @@ const LoginForm = () => {
     };
     const isValid = Object.keys(errors).length === 0;
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
         e.preventDefault();
         const isValid = validate();
         if (!isValid) return;
         console.log(data);
+        try {
+            signIn(data);
+        } catch (error) {
+            console.log(error);
+        }
     };
     return (
         <form onSubmit={handleSubmit}>
