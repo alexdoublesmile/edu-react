@@ -5,7 +5,12 @@ import axios from "axios";
 import userService from "../services/user.service";
 import { setTokens } from "../services/localStorage.service";
 
-const httpAuth = axios.create();
+const httpAuth = axios.create({
+    baseURL: "https://identitytoolkit.googleapis.com/v1/",
+    params: {
+        key: process.env.REACT_APP_FIREBASE_KEY
+    }
+});
 const AuthContext = React.createContext();
 
 export const useAuth = () => {
@@ -17,33 +22,27 @@ const AuthProvider = ({ children }) => {
     const [error, setError] = useState(null);
 
     async function signIn({ email, password }) {
-        const url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.REACT_APP_FIREBASE_KEY}`;
         try {
-            const { data } = await httpAuth.post(url, {
+            const { data } = await httpAuth.post("accounts:signInWithPassword", {
                 email,
                 password,
                 returnSecureToken: true
             });
 
             setTokens(data);
-            // await createUser({ _id: data.localId, email, ...rest });
-            console.log("Sign in data: ", data);
         } catch (error) {
             errorCatcher(error);
             const { code, message } = error.response.data.error;
             if (code === 400) {
-                // if (message === "EMAIL_EXISTS") {
                 const errorObject = { email: message };
                 throw errorObject;
-                // }
             }
         }
     }
 
     async function signUp({ email, password, ...rest }) {
-        const url = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${process.env.REACT_APP_FIREBASE_KEY}`;
         try {
-            const { data } = await httpAuth.post(url, {
+            const { data } = await httpAuth.post(accounts:signUp, {
                 email,
                 password,
                 returnSecureToken: true
@@ -51,7 +50,6 @@ const AuthProvider = ({ children }) => {
 
             setTokens(data);
             await createUser({ _id: data.localId, email, ...rest });
-            console.log("Auth data: ", data);
         } catch (error) {
             errorCatcher(error);
             const { code, message } = error.response.data.error;
