@@ -12,6 +12,7 @@ const LoginForm = () => {
         stayOn: false
     });
     const [errors, setErrors] = useState({});
+    const [enterError, setEnterError] = useState("");
     const { signIn } = useAuth();
     const history = useHistory();
 
@@ -52,6 +53,7 @@ const LoginForm = () => {
             await signIn(data);
             history.push("/");
         } catch (error) {
+            setEnterError(error.message);
             console.log(error.message);
         }
     };
@@ -79,6 +81,7 @@ const LoginForm = () => {
             >
                 Оставаться в системе
             </CheckBoxField>
+            {enterError && <p className="text-danger">{enterError}</p>}
             <button
                 className="btn btn-primary w-100 mx-auto"
                 type="submit"
