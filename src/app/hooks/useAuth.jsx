@@ -17,11 +17,11 @@ const AuthProvider = ({ children }) => {
             password,
             returnSecureToken: true
         });
-        console.log(data);
+        console.log("Auth data: ", data);
     };
 
     return (
-        <AuthContext.Provider value={signUp}>
+        <AuthContext.Provider value={{ signUp }}>
             { children }
         </AuthContext.Provider>
     );

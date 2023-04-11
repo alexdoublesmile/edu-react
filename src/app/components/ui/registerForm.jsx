@@ -124,7 +124,7 @@ const RegisterForm = () => {
             qualities: data.qualities.map(q => q.value)
         };
 
-        console.log(newData);
+        console.log("Submit data: ", newData);
         signUp(newData);
     };
 
