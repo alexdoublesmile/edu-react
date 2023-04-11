@@ -30,6 +30,7 @@ const AuthProvider = ({ children }) => {
             });
 
             setTokens(data);
+            console.log("Sign in data: ", data);
         } catch (error) {
             errorCatcher(error);
             const { code, message } = error.response.data.error;
@@ -50,6 +51,7 @@ const AuthProvider = ({ children }) => {
 
             setTokens(data);
             await createUser({ _id: data.localId, email, ...rest });
+            console.log("Sign up data: ", data);
         } catch (error) {
             errorCatcher(error);
             const { code, message } = error.response.data.error;
