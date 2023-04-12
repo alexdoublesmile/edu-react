@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useHistory } from "react-router-dom";
+import { renderGear } from "../../utils/icons";
+
 const UserCard = ({ user }) => {
     const history = useHistory();
     const handleClick = () => {
@@ -13,7 +15,7 @@ const UserCard = ({ user }) => {
                     className="position-absolute top-0 end-0 btn btn-light btn-sm"
                     onClick={handleClick}
                 >
-                    <i className="bi bi-gear"></i>
+                    { renderGear() }
                 </button>
                 <div className="d-flex flex-column align-items-center text-center position-relative">
                     <img
