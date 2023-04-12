@@ -45,7 +45,7 @@ const AuthProvider = ({ children }) => {
     }
 
     function logout() {
-        
+        localStorageService.removeAuthData();
     }
 
     function randomInt(min, max) {
