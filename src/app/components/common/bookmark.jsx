@@ -1,9 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { renderEmptyBookmark, renderMarkedBookmark } from "../../utils/icons";
 const BookMark = ({ status, ...rest }) => {
     return (
         <button {...rest}>
-            <i className={"bi bi-bookmark" + (status ? "-heart-fill" : "")}></i>
+            { status ? renderMarkedBookmark() : renderEmptyBookmark() }
         </button>
     );
 };
