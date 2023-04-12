@@ -37,30 +37,6 @@ const RegisterForm = () => {
     const [errors, setErrors] = useState({});
     const history = useHistory();
 
-    // const getProfessionById = (id) => {
-    //     for (const prof of professions) {
-    //         if (prof._id === id) {
-    //             return { _id: prof._id, name: prof.name };
-    //         }
-    //     }
-    // };
-
-    // const getQualities = (elements) => {
-    //     const qualitiesArray = [];
-    //     for (const elem of elements) {
-    //         for (const quality in qualities) {
-    //             if (elem.value === qualities[quality]._id) {
-    //                 qualitiesArray.push({
-    //                     _id: qualities[quality]._id,
-    //                     name: qualities[quality].name,
-    //                     color: qualities[quality].color
-    //                 });
-    //             }
-    //         }
-    //     }
-    //     return qualitiesArray;
-    // };
-
     const handleChange = (target) => {
         setData((prevState) => ({
             ...prevState,

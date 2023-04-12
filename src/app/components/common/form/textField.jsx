@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+import { renderEye } from "../../../utils/icons";
 
 const TextField = ({ label, type, name, value, onChange, error }) => {
     const [showPassword, setShowPassword] = useState(false);
@@ -31,11 +32,7 @@ const TextField = ({ label, type, name, value, onChange, error }) => {
                         type="button"
                         onClick={toggleShowPassword}
                     >
-                        <i
-                            className={
-                                "bi bi-eye" + (showPassword ? "-slash" : "")
-                            }
-                        ></i>
+                        {renderEye(showPassword)}
                     </button>
                 )}
                 {error && <div className="invalid-feedback">{error}</div>}
