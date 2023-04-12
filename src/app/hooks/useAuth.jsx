@@ -31,7 +31,7 @@ const AuthProvider = ({ children }) => {
             });
 
             setTokens(data);
-            getUserData();
+            await getUserData();
             console.log("Sign in data: ", data);
         } catch (error) {
             errorCatcher(error);
