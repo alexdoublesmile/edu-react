@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useHistory } from "react-router-dom";
-import { renderGear } from "../../utils/icons";
+import { renderGear, renderSortArrow } from "../../utils/icons";
 
 const UserCard = ({ user }) => {
     const history = useHistory();
@@ -29,14 +29,8 @@ const UserCard = ({ user }) => {
                             {user.profession.name}
                         </p>
                         <div className="text-muted">
-                            <i
-                                className="bi bi-caret-down-fill text-primary"
-                                role="button"
-                            ></i>
-                            <i
-                                className="bi bi-caret-up text-secondary"
-                                role="button"
-                            ></i>
+                            { renderSortArrow("desc") }
+                            { renderSortArrow() }
                             <span className="ms-2">{user.rate}</span>
                         </div>
                     </div>
