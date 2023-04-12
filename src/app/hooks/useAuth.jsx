@@ -65,7 +65,18 @@ const AuthProvider = ({ children }) => {
             });
 
             setTokens(data);
-            await createUser({ _id: data.localId, email, rate: randomInt(1, 5), completedMeetings: randomInt(0, 200), ...rest });
+            await createUser({
+                _id: data.localId,
+                email,
+                rate: randomInt(1, 5),
+                completedMeetings: randomInt(0, 200),
+                image: `https://avatars.dicebear.com/api/avataaars/${(
+                    Math.random() + 1
+                )
+                    .toString(36)
+                    .substring(7)}.svg`,
+                ...rest
+            });
             console.log("Sign up data: ", data);
         } catch (error) {
             errorCatcher(error);
