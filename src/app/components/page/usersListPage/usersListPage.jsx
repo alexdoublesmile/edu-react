@@ -71,7 +71,7 @@ const UsersListPage = () => {
                 )
                 : data;
 
-        return filteredUsers.filter(user => user.id !== currentUser._id);
+        return filteredUsers.filter(user => user._id !== currentUser._id);
     };
 
     const filteredUsers = filterUsers(users);
