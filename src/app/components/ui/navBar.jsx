@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 const NavBar = () => {
-    const currentUser = useAuth();
+    const { currentUser } = useAuth();
 
     return (
         <nav className="navbar bg-light mb-3">
