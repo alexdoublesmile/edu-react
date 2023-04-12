@@ -1,13 +1,10 @@
-import React, { useEffect, useState } from "react";
-import API from "../../../api";
-import SelectField from "../form/selectField";
+import React, { useState } from "react";
 import TextAreaField from "../form/textAreaField";
 import { validator } from "../../../utils/validator";
 import PropTypes from "prop-types";
-const initialData = { userId: "", content: "" };
 
 const AddCommentForm = ({ onSubmit }) => {
-    const [data, setData] = useState(initialData);
+    const [data, setData] = useState({});
     const [errors, setErrors] = useState({});
     const handleChange = (target) => {
         setData((prevState) => ({
@@ -29,7 +26,7 @@ const AddCommentForm = ({ onSubmit }) => {
         return Object.keys(errors).length === 0;
     };
     const clearForm = () => {
-        setData(initialData);
+        setData({});
         setErrors({});
     };
     const handleSubmit = (e) => {
@@ -44,7 +41,7 @@ const AddCommentForm = ({ onSubmit }) => {
             <h2>New comment</h2>
             <form onSubmit={handleSubmit}>
                 <TextAreaField
-                    value={data.content}
+                    value={data.content || ""}
                     onChange={handleChange}
                     name="content"
                     label="Сообщение"
