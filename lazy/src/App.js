@@ -2,14 +2,13 @@ import React, { Suspense } from 'react';
 import { useResource } from './resource';
 import Posts from './Posts';
 
-const resource = useResource();
-
 function App() {
+  const resource = useResource();
 
   return (
     <div className="container">
       <h1>Suspense for Data fetching</h1>
-      <Suspense>
+      <Suspense fallback={<p>Loading...</p>}>
         <Posts resource={resource} />
       </Suspense>
     </div>
