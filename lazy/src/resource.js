@@ -1,6 +1,7 @@
 export function useResource() {
     return {
-        posts: wrapPromise(fetchPosts())
+        posts: wrapPromise(fetchPosts()),
+        users: wrapPromise(fetchUsers())
     }
 };
 
@@ -31,4 +32,9 @@ function wrapPromise(promise) {
             }
         }
     };
+};
+
+async function fetchUsers() {
+    const resp = await fetch("https://jsonplaceholder.typicode.com/users");
+    return await resp.json();
 };
