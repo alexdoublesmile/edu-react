@@ -1,6 +1,8 @@
 import React from "react";
 
-const Posts = () => {
+const Posts = ({ resource }) => {
+    const posts = resource.posts.read();
+
     return ( 
         <>
             <h3>Posts</h3>
