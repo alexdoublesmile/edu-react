@@ -6,8 +6,11 @@ export function useResource() {
 };
 
 function fetchPosts() {
-    return fetch("https://jsonplaceholder.typicode.com/posts?_limit=5")
-        .then(resp => resp.json());
+    return delay(2000)
+        .then(() =>
+            fetch("https://jsonplaceholder.typicode.com/posts?_limit=5")
+        )
+        .then((resp) => resp.json());
 };
 
 const delay = (ms) => {
