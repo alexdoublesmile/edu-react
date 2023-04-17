@@ -11,7 +11,7 @@ function fetchPosts() {
 
 function wrapPromise(promise) {
     let status = "pending";
-    let result = null;
+    let result;
     const suspender = promise.then(resp => {
         result = resp;
         status = "success";
@@ -26,7 +26,7 @@ function wrapPromise(promise) {
                 throw suspender;
             } else if (status === "error") {
                 throw result;
-            } else if (status === "error") {
+            } else if (status === "success") {
                 return result;
             }
         }
