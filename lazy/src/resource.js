@@ -1,6 +1,6 @@
 export function useResource() {
     return {
-        posts: fetchPosts()
+        posts: wrapPromise(fetchPosts())
     }
 };
 
