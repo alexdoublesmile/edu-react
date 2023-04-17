@@ -10,6 +10,14 @@ function fetchPosts() {
         .then(resp => resp.json());
 };
 
+const delay = (ms) => {
+    return new Promise(resolve => {
+        setTimeout(() => {
+            resolve();
+        }, ms);
+    });
+};
+
 function wrapPromise(promise) {
     let status = "pending";
     let result;
