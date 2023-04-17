@@ -1,6 +1,7 @@
 import React, { Suspense } from 'react';
 import { useResource } from './resource';
 import Posts from './Posts';
+import Users from './Users';
 
 function App() {
   const resource = useResource();
@@ -8,9 +9,13 @@ function App() {
   return (
     <div className="container">
       <h1>Suspense for Data fetching</h1>
-      
-      <Suspense fallback={<p>Loading...</p>}>
+
+      <Suspense fallback={<p>Loading posts...</p>}>
         <Posts resource={resource} />
+      </Suspense>
+      
+      <Suspense fallback={<p>Loading users...</p>}>
+        <Users resource={resource} />
       </Suspense>
     </div>
   );
