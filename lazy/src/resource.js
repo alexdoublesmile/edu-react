@@ -46,6 +46,7 @@ function wrapPromise(promise) {
 };
 
 async function fetchUsers() {
+    await delay(750);
     const resp = await fetch("https://jsonplaceholder.typicode.com/users");
     return await resp.json();
 };
