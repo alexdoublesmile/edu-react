@@ -16,7 +16,6 @@ function App() {
         <div>
             <AuthProvider>
                 <NavBar />
-
                 <QualitiesProvider>
                     <ProfessionProvider>
                         <Switch>
